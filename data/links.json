@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "updated": "2026-07-08",
+  "links": [
+    {
+      "title": "Anthropic Documentation",
+      "url": "https://docs.anthropic.com/",
+      "note": "Claude API と Claude 関連機能の公式ドキュメント。"
+    },
+    {
+      "title": "OpenAI Documentation",
+      "url": "https://platform.openai.com/docs",
+      "note": "OpenAI API とモデル利用の公式ドキュメント。"
+    },
+    {
+      "title": "GitHub Pages Documentation",
+      "url": "https://docs.github.com/en/pages",
+      "note": "GitHub Pages で静的サイトを公開するための公式ドキュメント。"
+    },
+    {
+      "title": "Electron Documentation",
+      "url": "https://www.electronjs.org/docs/latest/",
+      "note": "デスクトップアプリ化に使った Electron の公式ドキュメント。"
+    },
+    {
+      "title": "MDN Web Docs",
+      "url": "https://developer.mozilla.org/",
+      "note": "HTML、CSS、JavaScript の基本を確認するためのリファレンス。"
+    }
+  ]
+}

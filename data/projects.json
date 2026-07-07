@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "updated": "2026-07-08",
+  "projects": [
+    {
+      "slug": "soda-typing",
+      "title": "速・打",
+      "subtitle": "タイピング道場",
+      "status": "公開準備中",
+      "summary": "ひらがなを見てローマ字で入力する、静かなデスクトップ向けタイピング練習アプリ。",
+      "description": "短文・中文・長文などのモードを選び、KPM、正確さ、ミス傾向をローカルに記録します。サーバーや外部アカウントなしで使える Electron アプリです。",
+      "period": "2026-05-31 - 2026-06-24",
+      "costApprox": "ほぼ0円",
+      "tools": ["Electron", "React", "Babel", "Claude", "Codex"],
+      "aiUsed": [
+        {
+          "name": "Claude",
+          "usage": "UI 試作と改善方針の整理"
+        },
+        {
+          "name": "Codex",
+          "usage": "Electron 化、公開用リポジトリ整理、README 作成"
+        }
+      ],
+      "stuckPoints": [
+        {
+          "problem": "ブラウザ上の試作を、サーバー不要のデスクトップアプリとして動かす必要があった。",
+          "solution": "JSX を事前コンパイルし、Electron が読む renderer を生成する build.js を用意した。"
+        },
+        {
+          "problem": "実行時に外部ネットワークへ依存しない形にしたかった。",
+          "solution": "React、ReactDOM、フォントをビルド時に取り込み、ローカルファイルだけで起動する構成にした。"
+        },
+        {
+          "problem": "元の作業フォルダには依存パッケージや生成物が含まれていた。",
+          "solution": "公開リポジトリでは node_modules、renderer、dist を除外し、再生成できる source だけを管理する。"
+        }
+      ],
+      "screenshots": [
+        {
+          "src": "/assets/projects/soda-typing/game.png",
+          "alt": "速・打の練習画面"
+        },
+        {
+          "src": "/assets/projects/soda-typing/result.png",
+          "alt": "速・打の結果画面"
+        },
+        {
+          "src": "/assets/projects/soda-typing/analysis.png",
+          "alt": "速・打の分析画面"
+        },
+        {
+          "src": "/assets/projects/soda-typing/settings.png",
+          "alt": "速・打の設定画面"
+        }
+      ],
+      "links": [
+        {
+          "label": "GitHub",
+          "url": "https://github.com/TENKAKU-ux/soda-typing"
+        }
+      ],
+      "tags": ["Typing", "Electron", "Offline", "Japanese"]
+    }
+  ]
+}
