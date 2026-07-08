@@ -1,4 +1,6 @@
 import fs from 'node:fs/promises';
+import { readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -18,6 +20,16 @@ const history = [
   ['2026-06-24', '「速・打」完成、公開準備へ'],
   ['2026-07', 'ポートフォリオサイトを公開'],
 ];
+
+// 同名差し替えでもキャッシュに残らないよう、内容ハッシュをクエリで付ける
+function versioned(src) {
+  try {
+    const hash = createHash('sha256').update(readFileSync(path.join(root, src))).digest('hex').slice(0, 8);
+    return `${src}?v=${hash}`;
+  } catch {
+    return src;
+  }
+}
 
 function escapeHtml(value) {
   return String(value ?? '')
@@ -74,7 +86,7 @@ function projectCard(project, headingLevel = 'h2') {
       <ul class="tag-list">${project.tags.map((tag) => `<li>${escapeHtml(tag)}</li>`).join('')}</ul>
       <a class="more" href="/projects/${project.slug}/">実録を読む →</a>
     </div>
-    ${shot ? `<a class="project-card-shot" href="/projects/${project.slug}/"><img src="${escapeHtml(shot.src)}" alt="${escapeHtml(shot.alt)}"></a>` : ''}
+    ${shot ? `<a class="project-card-shot" href="/projects/${project.slug}/"><img src="${escapeHtml(versioned(shot.src))}" alt="${escapeHtml(shot.alt)}"></a>` : ''}
   </article>`;
 }
 
@@ -91,7 +103,7 @@ function carousel(project) {
   if (!shots.length) return '';
   return `<section class="anim d4">
       <div class="carousel" role="button" tabindex="0" aria-label="次のスクリーンショットへ">
-        ${shots.map((shot, i) => `<img src="${escapeHtml(shot.src)}" alt="${escapeHtml(shot.alt)}"${i === 0 ? ' class="active"' : ''}>`).join('')}
+        ${shots.map((shot, i) => `<img src="${escapeHtml(versioned(shot.src))}" alt="${escapeHtml(shot.alt)}"${i === 0 ? ' class="active"' : ''}>`).join('')}
         <div class="carousel-counter"><span data-carousel-num>1</span> / ${shots.length}</div>
       </div>
       <div class="carousel-bar">
@@ -139,7 +151,7 @@ function relatedWorks(project) {
   if (!project.related?.length) return '';
   return `<section>
       <h2>関連</h2>
-      <p class="section-note">似たような題材で作られた、他の人の開発。</p>
+      <p class="section-note">似たような題材で作られた、他の方々の開発。</p>
       <div class="related-list">${project.related.map((item) => `<a class="related-card" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">
         <span class="related-main">
           <strong>${escapeHtml(item.title)}</strong>
