@@ -56,8 +56,15 @@
       ],
       "links": [
         {
-          "label": "GitHub",
+          "label": "GitHub — soda-typing",
           "url": "https://github.com/TENKAKU-ux/soda-typing"
+        }
+      ],
+      "related": [
+        {
+          "title": "寿司打",
+          "author": "Neutral",
+          "url": "https://sushida.net/"
         }
       ],
       "tags": ["Typing", "Electron", "Offline", "Japanese"]

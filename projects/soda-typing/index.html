@@ -5,36 +5,73 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="ひらがなを見てローマ字で入力する、静かなデスクトップ向けタイピング練習アプリ。">
   <title>速・打 | TENKAKU-ux</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>
   <header class="site-header">
-    <a class="brand" href="/">TENKAKU-ux</a>
-    <nav>
-      <a href="/">Home</a><a href="/projects/">Projects</a><a href="/links/">Links</a><a href="/about/">About</a>
-    </nav>
+    <div class="wrap">
+      <a class="brand" href="/">TENKAKU-ux</a>
+      <nav>
+        <a href="/">Home</a><a href="/projects/" class="active">Projects</a><a href="/links/">Links</a><a href="/about/">About</a>
+      </nav>
+    </div>
   </header>
-  <main>
+  <main class="wrap">
     <article class="project-detail">
-    <p class="eyebrow">公開準備中</p>
-    <h1>速・打 <span>タイピング道場</span></h1>
-    <p class="lead">短文・中文・長文などのモードを選び、KPM、正確さ、ミス傾向をローカルに記録します。サーバーや外部アカウントなしで使える Electron アプリです。</p>
-    <div class="screenshots">
-    <figure>
-      <img src="/assets/projects/soda-typing/game.png" alt="速・打の練習画面">
-      <figcaption>速・打の練習画面</figcaption>
-    </figure><figure>
-      <img src="/assets/projects/soda-typing/result.png" alt="速・打の結果画面">
-      <figcaption>速・打の結果画面</figcaption>
-    </figure><figure>
-      <img src="/assets/projects/soda-typing/analysis.png" alt="速・打の分析画面">
-      <figcaption>速・打の分析画面</figcaption>
-    </figure><figure>
-      <img src="/assets/projects/soda-typing/settings.png" alt="速・打の設定画面">
-      <figcaption>速・打の設定画面</figcaption>
-    </figure>
-  </div>
-    <section>
+    <p class="back-link anim d1"><a href="/projects/">← 作品一覧</a></p>
+    <header>
+      <p class="eyebrow">公開準備中</p>
+      <h1>速・打 <span>タイピング道場</span></h1>
+      <p class="lead">短文・中文・長文などのモードを選び、KPM、正確さ、ミス傾向をローカルに記録します。サーバーや外部アカウントなしで使える Electron アプリです。</p>
+    </header>
+    <section class="anim d4">
+      <div class="carousel" role="button" tabindex="0" aria-label="次のスクリーンショットへ">
+        <img src="/assets/projects/soda-typing/game.png" alt="速・打の練習画面" class="active"><img src="/assets/projects/soda-typing/result.png" alt="速・打の結果画面"><img src="/assets/projects/soda-typing/analysis.png" alt="速・打の分析画面"><img src="/assets/projects/soda-typing/settings.png" alt="速・打の設定画面">
+        <div class="carousel-counter"><span data-carousel-num>1</span> / 4</div>
+      </div>
+      <div class="carousel-bar">
+        <p class="carousel-caption" data-carousel-caption>速・打の練習画面</p>
+        <div class="carousel-controls">
+          <div class="carousel-dots">
+            <button type="button" aria-label="スクリーンショットを選ぶ" class="active"></button><button type="button" aria-label="スクリーンショットを選ぶ"></button><button type="button" aria-label="スクリーンショットを選ぶ"></button><button type="button" aria-label="スクリーンショットを選ぶ"></button>
+          </div>
+          <span class="carousel-hint">タップで次へ</span>
+        </div>
+      </div>
+    </section>
+    <script>
+    (() => {
+      const box = document.querySelector('.carousel');
+      if (!box) return;
+      const shots = Array.from(box.querySelectorAll('img'));
+      const dots = Array.from(document.querySelectorAll('.carousel-dots button'));
+      const num = document.querySelector('[data-carousel-num]');
+      const caption = document.querySelector('[data-carousel-caption]');
+      let current = 0;
+      let timer;
+      const show = (next) => {
+        current = (next + shots.length) % shots.length;
+        shots.forEach((img, i) => img.classList.toggle('active', i === current));
+        dots.forEach((dot, i) => dot.classList.toggle('active', i === current));
+        num.textContent = current + 1;
+        caption.textContent = shots[current].alt;
+      };
+      const arm = () => {
+        clearInterval(timer);
+        timer = setInterval(() => show(current + 1), 4000);
+      };
+      box.addEventListener('click', () => { show(current + 1); arm(); });
+      box.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(current + 1); arm(); }
+      });
+      dots.forEach((dot, i) => dot.addEventListener('click', (e) => { e.stopPropagation(); show(i); arm(); }));
+      arm();
+    })();
+    </script>
+    <section class="anim d5">
       <h2>実録データ</h2>
       <dl class="facts">
     <div><dt>制作期間</dt><dd>2026-05-31 - 2026-06-24</dd></div>
@@ -44,30 +81,52 @@
     </section>
     <section>
       <h2>使った AI</h2>
-      <ul class="plain-list"><li><strong>Claude</strong>: UI 試作と改善方針の整理</li><li><strong>Codex</strong>: Electron 化、公開用リポジトリ整理、README 作成</li></ul>
+      <ul class="plain-list"><li><strong>Claude</strong><span>UI 試作と改善方針の整理</span></li><li><strong>Codex</strong><span>Electron 化、公開用リポジトリ整理、README 作成</span></li></ul>
     </section>
     <section>
       <h2>詰まった点と抜け方</h2>
       <div class="notes"><div>
-        <h3>ブラウザ上の試作を、サーバー不要のデスクトップアプリとして動かす必要があった。</h3>
-        <p>JSX を事前コンパイルし、Electron が読む renderer を生成する build.js を用意した。</p>
+        <span class="num">01</span>
+        <div>
+          <h3>ブラウザ上の試作を、サーバー不要のデスクトップアプリとして動かす必要があった。</h3>
+          <p>JSX を事前コンパイルし、Electron が読む renderer を生成する build.js を用意した。</p>
+        </div>
       </div><div>
-        <h3>実行時に外部ネットワークへ依存しない形にしたかった。</h3>
-        <p>React、ReactDOM、フォントをビルド時に取り込み、ローカルファイルだけで起動する構成にした。</p>
+        <span class="num">02</span>
+        <div>
+          <h3>実行時に外部ネットワークへ依存しない形にしたかった。</h3>
+          <p>React、ReactDOM、フォントをビルド時に取り込み、ローカルファイルだけで起動する構成にした。</p>
+        </div>
       </div><div>
-        <h3>元の作業フォルダには依存パッケージや生成物が含まれていた。</h3>
-        <p>公開リポジトリでは node_modules、renderer、dist を除外し、再生成できる source だけを管理する。</p>
+        <span class="num">03</span>
+        <div>
+          <h3>元の作業フォルダには依存パッケージや生成物が含まれていた。</h3>
+          <p>公開リポジトリでは node_modules、renderer、dist を除外し、再生成できる source だけを管理する。</p>
+        </div>
       </div></div>
     </section>
     <section>
+      <h2>関連作品</h2>
+      <p class="section-note">同じ題材で作られた、他の人の開発。</p>
+      <div class="related-list"><a class="related-card" href="https://sushida.net/" target="_blank" rel="noopener">
+        <span class="related-main">
+          <strong>寿司打</strong>
+          <span>作者: Neutral</span>
+        </span>
+        <span class="related-arrow">↗</span>
+      </a></div>
+    </section>
+    <section>
       <h2>リンク</h2>
-      <ul class="plain-list"><li><a href="https://github.com/TENKAKU-ux/soda-typing">GitHub</a></li></ul>
+      <ul class="plain-list"><li><a href="https://github.com/TENKAKU-ux/soda-typing" target="_blank" rel="noopener">GitHub — soda-typing</a></li></ul>
     </section>
   </article>
   </main>
   <footer class="site-footer">
-    <span>GitHub: <a href="https://github.com/TENKAKU-ux">TENKAKU-ux</a></span>
-    <span>X: 準備中</span>
+    <div class="wrap">
+      <span>GitHub: <a href="https://github.com/TENKAKU-ux" target="_blank" rel="noopener">TENKAKU-ux</a></span>
+      <span>X: <a href="https://x.com/TINAMI_tay" target="_blank" rel="noopener">@TINAMI_tay</a></span>
+    </div>
   </footer>
 </body>
 </html>
