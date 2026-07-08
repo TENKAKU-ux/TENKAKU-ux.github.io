@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-07-08",
+  "updated": "2026-07-09",
   "projects": [
     {
       "slug": "soda-typing",
@@ -10,7 +10,7 @@
       "summary": "ひらがなを見てローマ字で入力する、静かなデスクトップ向けタイピング練習アプリ。",
       "description": "短文・中文・長文などのモードを選び、KPM、正確さ、ミス傾向をローカルに記録します。サーバーや外部アカウントなしで使える Electron アプリです。",
       "period": "2026-05-31 - 2026-06-24",
-      "costApprox": "ほぼ0円",
+      "costApprox": "ほぼ0円 ※大前提として Claude / Codex のサブスク（各 月約3,000円）を常用。以下すべての開発で共通",
       "tools": ["Electron", "React", "Babel", "Claude", "Codex"],
       "aiUsed": [
         {
@@ -64,6 +64,63 @@
         }
       ],
       "tags": ["Typing", "Electron", "Offline", "Japanese"]
+    },
+    {
+      "slug": "transcribe-app",
+      "title": "もじおこし",
+      "subtitle": "文字起こし＋要約コピー補助",
+      "status": "完成・自宅で運用中",
+      "summary": "講義動画などを Whisper でローカル文字起こしし、要約用プロンプトごとワンタップコピーして ChatGPT に渡せる Web アプリ。",
+      "description": "動画・音声をブラウザから投入すると、ローカルの Whisper（small・CPU）が文字起こしし、進捗をリアルタイム表示します。完了後は講義ノート・要点箇条書き・試験対策の3プリセットから選び、プロンプト＋全文を一発コピーして ChatGPT に貼るだけ。履歴・txt/srt ダウンロード付き。サーバーは自宅 PC、外部 API は使いません。",
+      "period": "2026-07-05（v1 を1日で完成。前身の CLI 版は 2026-06 作成）",
+      "costApprox": "0円（ローカル Whisper・外部 API 不使用）※大前提として Claude / Codex のサブスク（各 月約3,000円）を常用",
+      "tools": ["Python", "FastAPI", "Whisper", "SQLite", "Vanilla JS", "Claude", "Codex"],
+      "aiUsed": [
+        {
+          "name": "Claude",
+          "usage": "要件定義のラリーと画面デザイン（モック HTML）"
+        },
+        {
+          "name": "Codex",
+          "usage": "サーバー・フロントの実装とレビュー往復"
+        },
+        {
+          "name": "Whisper",
+          "usage": "文字起こしエンジン本体（small モデル・CPU 実行）"
+        }
+      ],
+      "stuckPoints": [
+        {
+          "problem": "家庭内 LAN の HTTP ページでは navigator.clipboard が使えず、肝心のコピーが失敗する。",
+          "solution": "execCommand によるフォールバックを用意し、それも失敗したら全選択済みテキストエリアを表示して、必ずコピー手段が残るようにした。"
+        },
+        {
+          "problem": "CPU での文字起こしは長時間かかるのに、標準では進捗が分からない。",
+          "solution": "ffprobe で得た総尺と Whisper が逐次出力するセグメントのタイムスタンプから進捗率を推定し、認識中のテキストもリアルタイムで流すようにした。"
+        },
+        {
+          "problem": "長い文字起こし全文を ChatGPT にどう渡すか迷った。",
+          "solution": "基本はプリセットプロンプト＋全文の一発コピーとし、長文のときだけ分割コピーを選べる二段構えにした。"
+        }
+      ],
+      "screenshots": [
+        {
+          "src": "/assets/projects/transcribe-app/desktop.png",
+          "alt": "もじおこしの完了画面（デスクトップ）"
+        },
+        {
+          "src": "/assets/projects/transcribe-app/mobile.png",
+          "alt": "もじおこしのスマホ表示"
+        }
+      ],
+      "links": [
+        {
+          "label": "OpenAI Whisper（使用している音声認識モデル）",
+          "url": "https://github.com/openai/whisper"
+        }
+      ],
+      "related": [],
+      "tags": ["Whisper", "FastAPI", "Local", "Japanese"]
     }
   ]
 }
