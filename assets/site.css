@@ -211,7 +211,7 @@ main {
   border-bottom: 1px solid var(--border);
 }
 
-.group-heading h2 {
+.group-heading .group-title {
   margin: 0;
   font-family: var(--serif);
   font-weight: 600;

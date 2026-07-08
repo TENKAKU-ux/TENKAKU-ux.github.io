@@ -28,16 +28,16 @@ const STR = {
     heroTitle: 'AI で、面倒くささ・分からなさ・<br>孤独さ・学びにくさを少し減らす。',
     heroLead: '自分を実験台にして、初心者が AI と一緒にどこまで作れるかを記録しています。完成品だけでなく、制作期間、使った AI、詰まった点と抜け方も残します。',
     homeProjectsEyebrow: 'Projects',
-    homeProjectsHeading: '作品',
+    homeProjectsHeading: '作成物',
     homeListNote: '次の実験は準備中です。完成し次第ここに積み上がります。',
     cardMore: '実録を読む →',
-    projectsHeading: '作品一覧',
-    projectsIntro: '公開用 allowlist に載せた作品だけを掲載しています。',
+    projectsHeading: '作成物一覧',
+    projectsIntro: '公開用 allowlist に載せた作成物だけを掲載しています。',
     projectGroups: [
       { key: 'published', label: '公開しているもの', note: '誰でも試せる、ソースを公開しているもの。' },
-      { key: 'local', label: 'このパソコンで使っているもの', note: '公開はせず、自分の環境で動かして使っているもの。' },
+      { key: 'local', label: '自分のパソコンで使っているもの', note: '公開はせず、自分のパソコンのみで使っているもの。' },
     ],
-    backToProjects: '← 作品一覧',
+    backToProjects: '← 作成物一覧',
     factsHeading: '実録データ',
     factPeriod: '制作期間',
     factCost: '概算費用',
@@ -88,7 +88,7 @@ const STR = {
     projectsIntro: 'Only projects on the public allowlist are shown here.',
     projectGroups: [
       { key: 'published', label: 'Published', note: 'Open source — anyone can try them.' },
-      { key: 'local', label: 'Running on my own machine', note: 'Not released; I run these for my own use.' },
+      { key: 'local', label: 'On my own computer', note: 'Not released; I run these only on my own computer.' },
     ],
     backToProjects: '← All projects',
     factsHeading: 'The record',
@@ -324,22 +324,23 @@ function homePage(loc, projects) {
       <p class="eyebrow">${escapeHtml(t.homeProjectsEyebrow)}</p>
       <h2>${escapeHtml(t.homeProjectsHeading)}</h2>
     </div>
-    <div class="project-list">${projects.map((project) => projectCard(loc, project, 'h3')).join('')}</div>
+    ${groupedProjects(loc, projects, { cardHeading: 'h3', titleTag: 'h3' })}
     <p class="list-note">${escapeHtml(t.homeListNote)}</p>
   </section>`, undefined, '/');
 }
 
-function projectGroup(loc, group, items) {
+function projectGroup(loc, group, items, { cardHeading = 'h2', titleTag = 'h2' } = {}) {
   return `<section class="project-group">
     <div class="group-heading">
-      <h2>${escapeHtml(group.label)}</h2>
+      <${titleTag} class="group-title">${escapeHtml(group.label)}</${titleTag}>
       <p>${escapeHtml(group.note)}</p>
     </div>
-    <div class="project-list">${items.map((project) => projectCard(loc, project)).join('')}</div>
+    <div class="project-list">${items.map((project) => projectCard(loc, project, cardHeading)).join('')}</div>
   </section>`;
 }
 
-function projectsPage(loc, projects) {
+// category（published/local）で軽く区切って描く。未知/未設定の作品は見出し無しで末尾に残す。
+function groupedProjects(loc, projects, opts = {}) {
   const t = STR[loc];
   const shown = new Set();
   const groups = t.projectGroups
@@ -351,15 +352,18 @@ function projectsPage(loc, projects) {
     .filter(({ items }) => items.length);
   const rest = projects.filter((project) => !shown.has(project));
 
-  const body = groups.map(({ group, items }) => projectGroup(loc, group, items)).join('')
-    + (rest.length ? `<div class="project-list">${rest.map((project) => projectCard(loc, project)).join('')}</div>` : '');
+  return groups.map(({ group, items }) => projectGroup(loc, group, items, opts)).join('')
+    + (rest.length ? `<div class="project-list">${rest.map((project) => projectCard(loc, project, opts.cardHeading || 'h2')).join('')}</div>` : '');
+}
 
+function projectsPage(loc, projects) {
+  const t = STR[loc];
   return page(loc, 'Projects', `<section class="page-head">
     <p class="eyebrow">Projects</p>
     <h1>${escapeHtml(t.projectsHeading)}</h1>
     <p>${escapeHtml(t.projectsIntro)}</p>
   </section>
-  <div class="anim d4">${body}</div>`, undefined, '/projects/');
+  <div class="anim d4">${groupedProjects(loc, projects, { cardHeading: 'h2', titleTag: 'h2' })}</div>`, undefined, '/projects/');
 }
 
 function projectPage(loc, project) {
