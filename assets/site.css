@@ -165,10 +165,13 @@ main {
   margin: 0 0 22px;
   font-family: var(--serif);
   font-weight: 600;
-  font-size: clamp(2rem, 5.4vw, 3.9rem);
-  line-height: 1.28;
+  font-size: clamp(1.7rem, 4.4vw, 3rem);
+  line-height: 1.32;
   letter-spacing: .01em;
 }
+
+/* 語（面倒くささ・等）が途中で折り返さないようにして、孤立した端文字を防ぐ */
+.hero h1 .np { white-space: nowrap; }
 
 .hero p:not(.eyebrow) {
   margin: 0;

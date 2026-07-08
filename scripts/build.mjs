@@ -25,7 +25,7 @@ const STR = {
       ['/about/', 'About'],
     ],
     heroEyebrow: 'Portfolio',
-    heroTitle: 'AI で、面倒くささ・分からなさ・<br>孤独さ・学びにくさを少し減らす。',
+    heroTitle: 'AI で、<span class="np">面倒くささ・</span><span class="np">分からなさ・</span><br><span class="np">孤独さ・</span><span class="np">学びにくさを</span><span class="np">少し減らす。</span>',
     heroLead: '自分を実験台にして、初心者が AI と一緒にどこまで作れるかを記録しています。完成品だけでなく、制作期間、使った AI、詰まった点と抜け方も残します。',
     homeProjectsEyebrow: 'Projects',
     homeProjectsHeading: '作成物',
