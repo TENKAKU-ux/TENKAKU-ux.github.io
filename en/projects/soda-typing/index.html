@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="ja">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="ひらがなを見てローマ字で入力する、静かなデスクトップ向けタイピング練習アプリ。">
-  <title>速・打 | TENKAKU-ux</title>
+  <meta name="description" content="A quiet desktop typing app: read hiragana, type it in romaji.">
+  <title>Soku-Da | TENKAKU-ux</title>
   <link rel="alternate" hreflang="ja" href="https://tenkaku-ux.github.io/projects/soda-typing/">
   <link rel="alternate" hreflang="en" href="https://tenkaku-ux.github.io/en/projects/soda-typing/">
   <link rel="alternate" hreflang="x-default" href="https://tenkaku-ux.github.io/projects/soda-typing/">
@@ -16,35 +16,35 @@
 <body>
   <header class="site-header">
     <div class="wrap">
-      <a class="brand" href="/">TENKAKU-ux</a>
+      <a class="brand" href="/en/">TENKAKU-ux</a>
       <div class="nav-group">
         <nav>
-          <a href="/">Home</a><a href="/projects/" class="active">Projects</a><a href="/links/">Links</a><a href="/about/">About</a>
+          <a href="/en/">Home</a><a href="/en/projects/" class="active">Projects</a><a href="/en/links/">Links</a><a href="/en/about/">About</a>
         </nav>
-        <a class="lang-switch" href="/en/projects/soda-typing/" hreflang="en">EN</a>
+        <a class="lang-switch" href="/projects/soda-typing/" hreflang="ja">日本語</a>
       </div>
     </div>
   </header>
   <main class="wrap">
     <article class="project-detail">
-    <p class="back-link anim d1"><a href="/projects/">← 作品一覧</a></p>
+    <p class="back-link anim d1"><a href="/en/projects/">← All projects</a></p>
     <header>
-      <p class="eyebrow">公開中</p>
-      <h1>速・打 <span>タイピング道場</span></h1>
-      <p class="lead">短文・中文・長文などのモードを選び、KPM、正確さ、ミス傾向をローカルに記録します。サーバーや外部アカウントなしで使える Electron アプリです。</p>
+      <p class="eyebrow">Live</p>
+      <h1>Soku-Da <span>Typing Dojo</span></h1>
+      <p class="lead">Pick a short, medium, or long-text mode, and it records your KPM, accuracy, and mistake tendencies locally. An Electron app that works with no server and no external account.</p>
     </header>
     <section class="anim d4">
-      <div class="carousel" role="button" tabindex="0" aria-label="次のスクリーンショットへ">
-        <img src="/assets/projects/soda-typing/game.png?v=6c5ed389" alt="速・打の練習画面" class="active"><img src="/assets/projects/soda-typing/result.png?v=6b650155" alt="速・打の結果画面"><img src="/assets/projects/soda-typing/analysis.png?v=786e069d" alt="速・打の分析画面">
+      <div class="carousel" role="button" tabindex="0" aria-label="Next screenshot">
+        <img src="/assets/projects/soda-typing/game.png?v=6c5ed389" alt="Soku-Da practice screen" class="active"><img src="/assets/projects/soda-typing/result.png?v=6b650155" alt="Soku-Da result screen"><img src="/assets/projects/soda-typing/analysis.png?v=786e069d" alt="Soku-Da analysis screen">
         <div class="carousel-counter"><span data-carousel-num>1</span> / 3</div>
       </div>
       <div class="carousel-bar">
-        <p class="carousel-caption" data-carousel-caption>速・打の練習画面</p>
+        <p class="carousel-caption" data-carousel-caption>Soku-Da practice screen</p>
         <div class="carousel-controls">
           <div class="carousel-dots">
-            <button type="button" aria-label="スクリーンショットを選ぶ" class="active"></button><button type="button" aria-label="スクリーンショットを選ぶ"></button><button type="button" aria-label="スクリーンショットを選ぶ"></button>
+            <button type="button" aria-label="Choose a screenshot" class="active"></button><button type="button" aria-label="Choose a screenshot"></button><button type="button" aria-label="Choose a screenshot"></button>
           </div>
-          <span class="carousel-hint">タップで次へ</span>
+          <span class="carousel-hint">Tap for next</span>
         </div>
       </div>
     </section>
@@ -78,52 +78,52 @@
     })();
     </script>
     <section class="anim d5">
-      <h2>実録データ</h2>
+      <h2>The record</h2>
       <dl class="facts">
-    <div><dt>制作期間</dt><dd>2026-05-31 - 2026-06-24</dd></div>
-    <div><dt>概算費用</dt><dd>ほぼ0円 ※大前提として Claude / Codex のサブスク（各 月約3,000円）を常用。以下すべての開発で共通</dd></div>
-    <div><dt>使った道具</dt><dd>Electron / React / Babel / Claude / Codex</dd></div>
+    <div><dt>Build period</dt><dd>2026-05-31 - 2026-06-24</dd></div>
+    <div><dt>Rough cost</dt><dd>Almost nothing. Baseline: I keep Claude and Codex subscriptions (about ¥3,000/month each) running as a given — shared across every project below.</dd></div>
+    <div><dt>Tools used</dt><dd>Electron / React / Babel / Claude / Codex</dd></div>
   </dl>
     </section>
     <section>
-      <h2>使った AI</h2>
-      <ul class="plain-list"><li><strong>Claude</strong><span>UI 試作と改善方針の整理</span></li><li><strong>Codex</strong><span>Electron 化、公開用リポジトリ整理、README 作成</span></li></ul>
+      <h2>AI used</h2>
+      <ul class="plain-list"><li><strong>Claude</strong><span>Prototyping the UI and organizing how to improve it</span></li><li><strong>Codex</strong><span>Electron packaging, cleaning up the public repo, writing the README</span></li></ul>
     </section>
     <section>
-      <h2>詰まった点と抜け方</h2>
+      <h2>Where I got stuck, and how I got out</h2>
       <div class="notes"><div>
         <span class="num">01</span>
         <div>
-          <h3>ブラウザ上の試作を、サーバー不要のデスクトップアプリとして動かす必要があった。</h3>
-          <p>JSX を事前コンパイルし、Electron が読む renderer を生成する build.js を用意した。</p>
+          <h3>I needed to run a browser prototype as a desktop app that requires no server.</h3>
+          <p>I precompiled the JSX and wrote a build.js that generates the renderer Electron loads.</p>
         </div>
       </div><div>
         <span class="num">02</span>
         <div>
-          <h3>実行時に外部ネットワークへ依存しない形にしたかった。</h3>
-          <p>React、ReactDOM、フォントをビルド時に取り込み、ローカルファイルだけで起動する構成にした。</p>
+          <h3>I wanted it to depend on no external network at runtime.</h3>
+          <p>I bundled React, ReactDOM, and the fonts at build time so it starts from local files alone.</p>
         </div>
       </div><div>
         <span class="num">03</span>
         <div>
-          <h3>元の作業フォルダには依存パッケージや生成物が含まれていた。</h3>
-          <p>公開リポジトリでは node_modules、renderer、dist を除外し、再生成できる source だけを管理する。</p>
+          <h3>The original working folder contained dependencies and build artifacts.</h3>
+          <p>The public repo excludes node_modules, renderer, and dist, tracking only the source that can be regenerated.</p>
         </div>
       </div></div>
     </section>
     <section>
-      <h2>関連</h2>
-      <p class="section-note">似たような題材で作られた、他の方々の開発。</p>
+      <h2>Related</h2>
+      <p class="section-note">Projects on similar themes, built by other developers.</p>
       <div class="related-list"><a class="related-card" href="https://sushida.net/" target="_blank" rel="noopener">
         <span class="related-main">
           <strong>寿司打</strong>
-          <span>作者: Neutral</span>
+          <span>By: Neutral</span>
         </span>
         <span class="related-arrow">↗</span>
       </a></div>
     </section>
     <section>
-      <h2>リンク</h2>
+      <h2>Links</h2>
       <ul class="plain-list"><li><a href="https://github.com/TENKAKU-ux/soda-typing" target="_blank" rel="noopener">GitHub — soda-typing</a></li></ul>
     </section>
   </article>

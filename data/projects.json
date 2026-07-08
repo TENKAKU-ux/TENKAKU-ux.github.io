@@ -4,6 +4,7 @@
   "projects": [
     {
       "slug": "soda-typing",
+      "category": "published",
       "title": "速・打",
       "subtitle": "タイピング道場",
       "status": "公開中",
@@ -63,10 +64,42 @@
           "url": "https://sushida.net/"
         }
       ],
-      "tags": ["Typing", "Electron", "Offline", "Japanese"]
+      "tags": ["Typing", "Electron", "Offline", "Japanese"],
+      "en": {
+        "title": "Soku-Da",
+        "subtitle": "Typing Dojo",
+        "status": "Live",
+        "summary": "A quiet desktop typing app: read hiragana, type it in romaji.",
+        "description": "Pick a short, medium, or long-text mode, and it records your KPM, accuracy, and mistake tendencies locally. An Electron app that works with no server and no external account.",
+        "costApprox": "Almost nothing. Baseline: I keep Claude and Codex subscriptions (about ¥3,000/month each) running as a given — shared across every project below.",
+        "aiUsed": [
+          { "usage": "Prototyping the UI and organizing how to improve it" },
+          { "usage": "Electron packaging, cleaning up the public repo, writing the README" }
+        ],
+        "stuckPoints": [
+          {
+            "problem": "I needed to run a browser prototype as a desktop app that requires no server.",
+            "solution": "I precompiled the JSX and wrote a build.js that generates the renderer Electron loads."
+          },
+          {
+            "problem": "I wanted it to depend on no external network at runtime.",
+            "solution": "I bundled React, ReactDOM, and the fonts at build time so it starts from local files alone."
+          },
+          {
+            "problem": "The original working folder contained dependencies and build artifacts.",
+            "solution": "The public repo excludes node_modules, renderer, and dist, tracking only the source that can be regenerated."
+          }
+        ],
+        "screenshots": [
+          { "alt": "Soku-Da practice screen" },
+          { "alt": "Soku-Da result screen" },
+          { "alt": "Soku-Da analysis screen" }
+        ]
+      }
     },
     {
       "slug": "transcribe-app",
+      "category": "local",
       "title": "もじおこし",
       "subtitle": "文字起こし＋要約コピー補助",
       "status": "完成・自宅で運用中",
@@ -120,7 +153,42 @@
         }
       ],
       "related": [],
-      "tags": ["Whisper", "FastAPI", "Local", "Japanese"]
+      "tags": ["Whisper", "FastAPI", "Local", "Japanese"],
+      "en": {
+        "title": "Mojiokoshi",
+        "subtitle": "Transcribe + summary-copy helper",
+        "status": "Finished, running at home",
+        "summary": "A web app that transcribes lecture videos locally with Whisper, then one-tap copies the text together with a summary prompt to hand off to ChatGPT.",
+        "description": "Drop a video or audio file in from the browser and local Whisper (small, CPU) transcribes it, showing progress in real time. When it is done, pick from three presets — lecture notes, key bullet points, or exam prep — and one-tap copy the prompt plus the full text to paste into ChatGPT. It includes history and txt/srt downloads. The server is my home PC; no external API is used.",
+        "period": "2026-07-05 (v1 built in a day; the earlier CLI version was made in 2026-06)",
+        "costApprox": "¥0 (local Whisper, no external API). Baseline: Claude and Codex subscriptions (about ¥3,000/month each) are always running as a given.",
+        "aiUsed": [
+          { "usage": "Requirements rallies and screen design (mock HTML)" },
+          { "usage": "Implementing the server and frontend, and review round-trips" },
+          { "usage": "The transcription engine itself (small model, CPU)" }
+        ],
+        "stuckPoints": [
+          {
+            "problem": "On an HTTP page over the home LAN, navigator.clipboard is not available, so the crucial copy fails.",
+            "solution": "I added an execCommand fallback, and if that also fails, it shows a pre-selected textarea, so a way to copy always remains."
+          },
+          {
+            "problem": "Transcribing on CPU takes a long time, yet by default there is no way to see progress.",
+            "solution": "I estimate progress from the total length via ffprobe and the timestamps of the segments Whisper emits one by one, and stream the text being recognized in real time too."
+          },
+          {
+            "problem": "I was not sure how to hand a long full transcript over to ChatGPT.",
+            "solution": "The default is a one-tap copy of the preset prompt plus the full text, with a second option to copy in chunks only when the text is long."
+          }
+        ],
+        "screenshots": [
+          { "alt": "Mojiokoshi completion screen (desktop)" },
+          { "alt": "Mojiokoshi on a phone" }
+        ],
+        "links": [
+          { "label": "OpenAI Whisper (the speech recognition model used)" }
+        ]
+      }
     }
   ]
 }
