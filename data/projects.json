@@ -6,7 +6,7 @@
       "slug": "soda-typing",
       "title": "速・打",
       "subtitle": "タイピング道場",
-      "status": "公開準備中",
+      "status": "公開中",
       "summary": "ひらがなを見てローマ字で入力する、静かなデスクトップ向けタイピング練習アプリ。",
       "description": "短文・中文・長文などのモードを選び、KPM、正確さ、ミス傾向をローカルに記録します。サーバーや外部アカウントなしで使える Electron アプリです。",
       "period": "2026-05-31 - 2026-06-24",
@@ -48,10 +48,6 @@
         {
           "src": "/assets/projects/soda-typing/analysis.png",
           "alt": "速・打の分析画面"
-        },
-        {
-          "src": "/assets/projects/soda-typing/settings.png",
-          "alt": "速・打の設定画面"
         }
       ],
       "links": [

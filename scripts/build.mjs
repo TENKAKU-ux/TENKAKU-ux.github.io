@@ -138,8 +138,8 @@ function carousel(project) {
 function relatedWorks(project) {
   if (!project.related?.length) return '';
   return `<section>
-      <h2>関連作品</h2>
-      <p class="section-note">同じ題材で作られた、他の人の開発。</p>
+      <h2>関連</h2>
+      <p class="section-note">似たような題材で作られた、他の人の開発。</p>
       <div class="related-list">${project.related.map((item) => `<a class="related-card" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">
         <span class="related-main">
           <strong>${escapeHtml(item.title)}</strong>
