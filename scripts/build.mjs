@@ -36,7 +36,7 @@ const STR = {
     projectsIntro: '公開用 allowlist に載せた作成物だけを掲載しています。',
     projectGroups: [
       { key: 'published', label: '公開しているもの', note: '誰でも試せる、ソースを公開しているもの。' },
-      { key: 'operated', label: '公開して運用しているもの', note: 'X などで公開運用していますが、ソースは非公開のもの。' },
+      { key: 'operated', label: '運用しているもの', note: 'X などで公開運用していますが、ソースは非公開のもの。' },
       { key: 'local', label: '自分のパソコンで使っているもの', note: '公開はせず、自分のパソコンのみで使っているもの。' },
     ],
     backToProjects: '← 作成物一覧',
@@ -56,7 +56,6 @@ const STR = {
     linksHeading: 'リンク集',
     linksIntro: 'AI と Web 開発を学ぶときに確認する公式ドキュメント中心のリンクです。',
     aboutHeading: '活動の軸',
-    aboutIntro: '大きな社会貢献や職業を最初から決めるのではなく、AI を詳しくない普通の人でも使える形にしていく段階にいます。',
     aboutParas: [
       'テーマは、AI で人間の面倒くささ・分からなさ・孤独さ・学びにくさを少し減らすことです。',
       '自分を実験台にして、AI で初心者がどこまでできるかを試し、記録し、小さな機能を積み上げます。完成品だけでなく、迷いながら作った過程も、次に作る人の道しるべとして残します。',
@@ -64,9 +63,10 @@ const STR = {
     ],
     historyHeading: 'あゆみ',
     history: [
-      ['2026-05-31', '「速・打」の開発を開始'],
-      ['2026-06-24', '「速・打」完成、公開準備へ'],
-      ['2026-07', 'ポートフォリオサイトを公開'],
+      ['2026-07-08', 'ポートフォリオサイトを公開（「速・打」を掲載）'],
+      ['2026-07-09', '「もじおこし」を追加'],
+      ['2026-07-10', '「速・打」のブラウザ版を公開'],
+      ['2026-07-10', 'AI キャラクター「まち」を追加'],
     ],
   },
   en: {
@@ -91,7 +91,7 @@ const STR = {
     projectsIntro: 'Only projects on the public allowlist are shown here.',
     projectGroups: [
       { key: 'published', label: 'Published', note: 'Open source — anyone can try them.' },
-      { key: 'operated', label: 'Running in public', note: 'Operating publicly (e.g. on X), but the source is not open.' },
+      { key: 'operated', label: 'In operation', note: 'Operating publicly (e.g. on X), but the source is not open.' },
       { key: 'local', label: 'On my own computer', note: 'Not released; I run these only on my own computer.' },
     ],
     backToProjects: '← All projects',
@@ -111,7 +111,6 @@ const STR = {
     linksHeading: 'Links',
     linksIntro: 'Mostly official documentation I check while learning AI and web development.',
     aboutHeading: 'What this is about',
-    aboutIntro: 'Rather than deciding on some big social mission or career up front, I am at the stage of shaping AI into a form that ordinary people, who are not AI experts, can actually use.',
     aboutParas: [
       'The theme is using AI to make the tedious, the confusing, the lonely, and the hard-to-learn a little lighter for people.',
       'I use myself as a test subject to see how far a beginner can get with AI, record it, and stack up small features. Beyond the finished products, I keep the messy process of building while unsure, as a signpost for whoever builds next.',
@@ -119,9 +118,10 @@ const STR = {
     ],
     historyHeading: 'Timeline',
     history: [
-      ['2026-05-31', 'Started building Soku-Da'],
-      ['2026-06-24', 'Soku-Da finished; preparing to release'],
-      ['2026-07', 'Published the portfolio site'],
+      ['2026-07-08', 'Published the portfolio site (with Soku-Da)'],
+      ['2026-07-09', 'Added Mojiokoshi'],
+      ['2026-07-10', 'Released the browser version of Soku-Da'],
+      ['2026-07-10', 'Added Machi, the AI character'],
     ],
   },
 };
@@ -428,7 +428,6 @@ function aboutPage(loc) {
   return page(loc, 'About', `<section class="page-head">
     <p class="eyebrow">About</p>
     <h1>${escapeHtml(t.aboutHeading)}</h1>
-    <p>${escapeHtml(t.aboutIntro)}</p>
   </section>
   <section class="text-block anim d4">
     ${t.aboutParas.map((para) => `<p>${escapeHtml(para)}</p>`).join('\n    ')}
