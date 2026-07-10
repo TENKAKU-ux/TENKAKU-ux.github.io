@@ -113,6 +113,9 @@
       "status": "完成・自宅で運用中",
       "summary": "講義動画などを Whisper でローカル文字起こしし、要約用プロンプトごとワンタップコピーして ChatGPT に渡せる Web アプリ。",
       "description": "動画・音声をブラウザから投入すると、ローカルの Whisper（small・CPU）が文字起こしし、進捗をリアルタイム表示します。完了後は講義ノート・要点箇条書き・試験対策の3プリセットから選び、プロンプト＋全文を一発コピーして ChatGPT に貼るだけ。履歴・txt/srt ダウンロード付き。サーバーは自宅 PC、外部 API は使いません。",
+      "article": {
+        "url": "https://zenn.dev/tenkaku_ux/articles/mojiokoshi-transcribe-app"
+      },
       "period": "2026-07-05（v1 を1日で完成。前身の CLI 版は 2026-06 作成）",
       "costApprox": "0円（ローカル Whisper・外部 API 不使用）※大前提として Claude / Codex のサブスク（各 月約3,000円）を常用",
       "tools": ["Python", "FastAPI", "Whisper", "SQLite", "Vanilla JS", "Claude", "Codex"],
