@@ -31,6 +31,7 @@ const STR = {
     homeProjectsHeading: '作成物',
     homeListNote: '次の実験は準備中です。完成し次第ここに積み上がります。',
     cardMore: '実録を読む →',
+    articleCta: 'Zenn で制作の詳しい記録を読む →',
     projectsHeading: '作成物一覧',
     projectsIntro: '公開用 allowlist に載せた作成物だけを掲載しています。',
     projectGroups: [
@@ -84,6 +85,7 @@ const STR = {
     homeProjectsHeading: 'Projects',
     homeListNote: 'The next experiment is in the works. It will pile up here once it is done.',
     cardMore: 'Read the log →',
+    articleCta: 'Read the full build log on Zenn →',
     projectsHeading: 'All projects',
     projectsIntro: 'Only projects on the public allowlist are shown here.',
     projectGroups: [
@@ -214,6 +216,7 @@ function page(loc, title, body, description, activePath, selfPath = activePath) 
     <div class="wrap">
       <span>GitHub: <a href="https://github.com/TENKAKU-ux" target="_blank" rel="noopener">TENKAKU-ux</a></span>
       <span>X: <a href="https://x.com/TINAMI_tay" target="_blank" rel="noopener">@TINAMI_tay</a></span>
+      <span>Zenn: <a href="https://zenn.dev/tenkaku_ux" target="_blank" rel="noopener">tenkaku_ux</a></span>
     </div>
   </footer>
 </body>
@@ -376,6 +379,7 @@ function projectPage(loc, project) {
       <h1>${escapeHtml(project.title)} <span>${escapeHtml(project.subtitle)}</span></h1>
       <p class="lead">${escapeHtml(project.description)}</p>
     </header>
+    ${project.article ? `<p class="article-cta anim d2"><a href="${escapeHtml(project.article.url)}" target="_blank" rel="noopener">${escapeHtml(project.article.label || t.articleCta)}</a></p>` : ''}
     ${carousel(loc, project)}
     <section class="anim d5">
       <h2>${escapeHtml(t.factsHeading)}</h2>

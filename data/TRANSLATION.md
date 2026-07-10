@@ -29,13 +29,15 @@
   "aiUsed":      [ { "usage": "…" }, … ],            // name は引き継ぐので usage だけ
   "stuckPoints": [ { "problem": "…", "solution": "…" }, … ],
   "screenshots": [ { "alt": "…" }, … ],              // src は引き継ぐので alt だけ
-  "links":       [ { "label": "…" }, … ]             // url は引き継ぐので label だけ。英語で十分なら省略可
+  "links":       [ { "label": "…" }, … ],            // url は引き継ぐので label だけ。英語で十分なら省略可
+  "article":     { "label": "…" }                    // Zenn 記事リンク（あれば）。url は引き継ぐので label だけ
 }
 ```
 
 - **順番はインデックスで対応する。** `aiUsed`/`stuckPoints`/`screenshots`/`links` は日本語と同じ件数・同じ並びにする。
 - 日本語側と英語で意味が変わらない値（`tags`・`tools`・技術名・URL）は書かない＝自動で共通。
 - `related`（他の方々の作品）の `title`/`author` は固有名なので原則そのまま。見出しや「作者:」ラベルは UI 側（build.mjs）で自動的に英語になる。
+- `article`（Zenn 記事リンク・作品にあれば）は `en` 側で `label` だけ訳す（`url` は共通）。
 
 ## 2. `data/links.json` — リンクを足す/直すたび
 
