@@ -386,6 +386,29 @@ main {
   box-shadow: var(--hover-shadow);
 }
 
+/* ============ ブラウザで遊ぶ導線（主ボタン） ============ */
+.play-cta { margin: 0 0 clamp(16px, 2.4vw, 22px); }
+
+.play-cta a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--link);
+  border: 1px solid var(--link);
+  border-radius: 999px;
+  padding: 11px 26px;
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background-color .3s, box-shadow .3s;
+}
+
+.play-cta a:hover {
+  background: var(--link-hover);
+  border-color: var(--link-hover);
+  box-shadow: var(--hover-shadow);
+}
+
 /* ============ 写真ショー ============ */
 .carousel {
   position: relative;

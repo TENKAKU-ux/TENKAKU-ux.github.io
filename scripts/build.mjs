@@ -379,6 +379,7 @@ function projectPage(loc, project) {
       <h1>${escapeHtml(project.title)} <span>${escapeHtml(project.subtitle)}</span></h1>
       <p class="lead">${escapeHtml(project.description)}</p>
     </header>
+    ${project.play ? `<p class="play-cta anim d2"><a href="${escapeHtml(project.play.url)}" target="_blank" rel="noopener">${escapeHtml(project.play.label)}</a></p>` : ''}
     ${project.article ? `<p class="article-cta anim d2"><a href="${escapeHtml(project.article.url)}" target="_blank" rel="noopener">${escapeHtml(project.article.label || t.articleCta)}</a></p>` : ''}
     ${carousel(loc, project)}
     <section class="anim d5">

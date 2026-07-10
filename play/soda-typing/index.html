@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:;" />
+  <title>速・打 — タイピング道場</title>
+  <link rel="stylesheet" href="fonts.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="vendor/react.production.min.js"></script>
+  <script src="vendor/react-dom.production.min.js"></script>
+  <script>
+    Object.assign(window, {
+      useState: React.useState,
+      useEffect: React.useEffect,
+      useRef: React.useRef,
+      useLayoutEffect: React.useLayoutEffect,
+      useMemo: React.useMemo,
+    });
+  </script>
+
+  <script src="romaji.js"></script>
+  <script src="content.js"></script>
+  <script src="storage.js"></script>
+  <script src="sound.js"></script>
+
+  <script src="tweaks-panel.js"></script>
+  <script src="common.js"></script>
+  <script src="Home.js"></script>
+  <script src="Game.js"></script>
+  <script src="Result.js"></script>
+  <script src="Analysis.js"></script>
+  <script src="Settings.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

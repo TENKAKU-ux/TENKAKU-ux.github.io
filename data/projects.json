@@ -8,8 +8,12 @@
       "title": "速・打",
       "subtitle": "タイピング道場",
       "status": "公開中",
-      "summary": "ひらがなを見てローマ字で入力する、静かなデスクトップ向けタイピング練習アプリ。",
-      "description": "短文・中文・長文などのモードを選び、KPM、正確さ、ミス傾向をローカルに記録します。サーバーや外部アカウントなしで使える Electron アプリです。",
+      "summary": "ひらがなを見てローマ字で入力する、静かなタイピング練習アプリ。ブラウザ版とデスクトップ版。",
+      "description": "短文・中文・長文などのモードを選び、KPM、正確さ、ミス傾向を記録します。サーバーや外部アカウントは使わず、記録は遊ぶ人のブラウザ内だけに残ります。インストール不要のブラウザ版と、ソースから起動するデスクトップ版（Electron）があります。",
+      "play": {
+        "label": "▶ ブラウザで遊ぶ（インストール不要）",
+        "url": "/play/soda-typing/"
+      },
       "period": "2026-05-31 - 2026-06-24",
       "costApprox": "ほぼ0円 ※大前提として Claude / Codex のサブスク（各 月約3,000円）を常用。以下すべての開発で共通",
       "tools": ["Electron", "React", "Babel", "Claude", "Codex"],
@@ -69,8 +73,9 @@
         "title": "Soku-Da",
         "subtitle": "Typing Dojo",
         "status": "Live",
-        "summary": "A quiet desktop typing app: read hiragana, type it in romaji.",
-        "description": "Pick a short, medium, or long-text mode, and it records your KPM, accuracy, and mistake tendencies locally. An Electron app that works with no server and no external account.",
+        "summary": "A quiet typing app: read hiragana, type it in romaji. Browser and desktop versions.",
+        "description": "Pick a short, medium, or long-text mode, and it records your KPM, accuracy, and mistake tendencies. No server and no external account — your records stay only in the browser you play in. There is a browser version that needs no install, and a desktop version (Electron) you run from source.",
+        "play": { "label": "▶ Play in your browser (no install)" },
         "costApprox": "Almost nothing. Baseline: I keep Claude and Codex subscriptions (about ¥3,000/month each) running as a given — shared across every project below.",
         "aiUsed": [
           { "usage": "Prototyping the UI and organizing how to improve it" },
