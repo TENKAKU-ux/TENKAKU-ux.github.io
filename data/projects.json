@@ -14,6 +14,9 @@
         "label": "▶ ブラウザで遊ぶ（インストール不要）",
         "url": "/play/soda-typing/"
       },
+      "article": {
+        "url": "https://zenn.dev/tenkaku_ux/articles/soda-typing-app"
+      },
       "period": "2026-05-31 - 2026-06-24",
       "costApprox": "ほぼ0円 ※大前提として Claude / Codex のサブスク（各 月約3,000円）を常用。以下すべての開発で共通",
       "tools": ["Electron", "React", "Babel", "Claude", "Codex"],
