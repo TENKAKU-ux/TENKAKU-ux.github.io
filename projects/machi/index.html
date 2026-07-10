@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ストリートファイター6のランクマッチを観測する AI キャラクター「まち」として、X（Twitter）で自動発信する bot。">
+  <title>まち | TENKAKU-ux</title>
+  <link rel="alternate" hreflang="ja" href="https://tenkaku-ux.github.io/projects/machi/">
+  <link rel="alternate" hreflang="en" href="https://tenkaku-ux.github.io/en/projects/machi/">
+  <link rel="alternate" hreflang="x-default" href="https://tenkaku-ux.github.io/projects/machi/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="/">TENKAKU-ux</a>
+      <div class="nav-group">
+        <nav>
+          <a href="/">Home</a><a href="/projects/" class="active">Projects</a><a href="/links/">Links</a><a href="/about/">About</a>
+        </nav>
+        <a class="lang-switch" href="/en/projects/machi/" hreflang="en">EN</a>
+      </div>
+    </div>
+  </header>
+  <main class="wrap">
+    <article class="project-detail">
+    <p class="back-link anim d1"><a href="/projects/">← 作成物一覧</a></p>
+    <header>
+      <p class="eyebrow">公開運用中・コード非公開</p>
+      <h1>まち <span>格ゲーを観測する AI キャラクター（X で運用中）</span></h1>
+      <p class="lead">自宅サーバー上で定時にツイート案を生成し、Discord の承認ボタンを押すと投稿される仕組みです。文章の生成は Gemini を使い、「格ゲーを日夜観測している AI」というキャラクターとして作り込んでいます。ときどき、開発者である私の活動も観測ネタとして取り上げます。X アカウントの運用のみを公開し、コードは非公開です。</p>
+    </header>
+    
+    
+    <section class="anim d4">
+      <div class="carousel" role="button" tabindex="0" aria-label="次のスクリーンショットへ">
+        <img src="/assets/projects/machi/profile.png?v=cfa34381" alt="まち（@machiTWEETai）の X プロフィール" class="active">
+        <div class="carousel-counter"><span data-carousel-num>1</span> / 1</div>
+      </div>
+      <div class="carousel-bar">
+        <p class="carousel-caption" data-carousel-caption>まち（@machiTWEETai）の X プロフィール</p>
+        <div class="carousel-controls">
+          <div class="carousel-dots">
+            <button type="button" aria-label="スクリーンショットを選ぶ" class="active"></button>
+          </div>
+          <span class="carousel-hint">タップで次へ</span>
+        </div>
+      </div>
+    </section>
+    <script>
+    (() => {
+      const box = document.querySelector('.carousel');
+      if (!box) return;
+      const shots = Array.from(box.querySelectorAll('img'));
+      const dots = Array.from(document.querySelectorAll('.carousel-dots button'));
+      const num = document.querySelector('[data-carousel-num]');
+      const caption = document.querySelector('[data-carousel-caption]');
+      let current = 0;
+      let timer;
+      const show = (next) => {
+        current = (next + shots.length) % shots.length;
+        shots.forEach((img, i) => img.classList.toggle('active', i === current));
+        dots.forEach((dot, i) => dot.classList.toggle('active', i === current));
+        num.textContent = current + 1;
+        caption.textContent = shots[current].alt;
+      };
+      const arm = () => {
+        clearInterval(timer);
+        timer = setInterval(() => show(current + 1), 4000);
+      };
+      box.addEventListener('click', () => { show(current + 1); arm(); });
+      box.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(current + 1); arm(); }
+      });
+      dots.forEach((dot, i) => dot.addEventListener('click', (e) => { e.stopPropagation(); show(i); arm(); }));
+      arm();
+    })();
+    </script>
+    <section class="anim d5">
+      <h2>実録データ</h2>
+      <dl class="facts">
+    <div><dt>制作期間</dt><dd>2026-04-28 〜 運用中（2026-07 に GitHub Actions から自宅サーバーへ移行）</dd></div>
+    <div><dt>概算費用</dt><dd>X API 月 約$1（従量・承認制で手動投稿も多く、自動投稿を絞っているため小さい）＋ Gemini 無料枠 ※大前提として Claude / Codex のサブスク（各 月約3,000円）を常用</dd></div>
+    <div><dt>使った道具</dt><dd>Python / systemd / Discord / Gemini / X API / Claude / Codex</dd></div>
+  </dl>
+    </section>
+    <section>
+      <h2>使った AI</h2>
+      <ul class="plain-list"><li><strong>Gemini</strong><span>ツイート本文の生成エンジン（Gemini 2.5 Flash）</span></li><li><strong>Claude</strong><span>要件定義・設計のラリーと運用改善</span></li><li><strong>Codex</strong><span>実装とレビューの往復</span></li></ul>
+    </section>
+    <section>
+      <h2>詰まった点と抜け方</h2>
+      <div class="notes"><div>
+        <span class="num">01</span>
+        <div>
+          <h3>AI が生成するツイートが単調になりやすく、多様性を保つのが難しかった。</h3>
+          <p>生成の指示（プロンプト）を改善し続けるループを作り、目標とする多様性まで回し続けた。今でも改善の余地は残っている。</p>
+        </div>
+      </div><div>
+        <span class="num">02</span>
+        <div>
+          <h3>投稿を自動化するために、X（Twitter）の API の仕組みを理解する必要があった。</h3>
+          <p>認証や投稿まわりを調べながら、自宅サーバーから安定して投稿できる形にまとめた。</p>
+        </div>
+      </div></div>
+    </section>
+    
+    <section>
+      <h2>リンク</h2>
+      <ul class="plain-list"><li><a href="https://x.com/machiTWEETai" target="_blank" rel="noopener">X — @machiTWEETai</a></li></ul>
+    </section>
+  </article>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>GitHub: <a href="https://github.com/TENKAKU-ux" target="_blank" rel="noopener">TENKAKU-ux</a></span>
+      <span>X: <a href="https://x.com/TINAMI_tay" target="_blank" rel="noopener">@TINAMI_tay</a></span>
+      <span>Zenn: <a href="https://zenn.dev/tenkaku_ux" target="_blank" rel="noopener">tenkaku_ux</a></span>
+    </div>
+  </footer>
+</body>
+</html>

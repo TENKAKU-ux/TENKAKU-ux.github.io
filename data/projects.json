@@ -197,6 +197,83 @@
           { "label": "OpenAI Whisper (the speech recognition model used)" }
         ]
       }
+    },
+    {
+      "slug": "machi",
+      "category": "operated",
+      "title": "まち",
+      "subtitle": "格ゲーを観測する AI キャラクター（X で運用中）",
+      "status": "公開運用中・コード非公開",
+      "summary": "ストリートファイター6のランクマッチを観測する AI キャラクター「まち」として、X（Twitter）で自動発信する bot。",
+      "description": "自宅サーバー上で定時にツイート案を生成し、Discord の承認ボタンを押すと投稿される仕組みです。文章の生成は Gemini を使い、「格ゲーを日夜観測している AI」というキャラクターとして作り込んでいます。ときどき、開発者である私の活動も観測ネタとして取り上げます。X アカウントの運用のみを公開し、コードは非公開です。",
+      "period": "2026-04-28 〜 運用中（2026-07 に GitHub Actions から自宅サーバーへ移行）",
+      "costApprox": "X API 月 約$1（従量・承認制で手動投稿も多く、自動投稿を絞っているため小さい）＋ Gemini 無料枠 ※大前提として Claude / Codex のサブスク（各 月約3,000円）を常用",
+      "tools": ["Python", "systemd", "Discord", "Gemini", "X API", "Claude", "Codex"],
+      "aiUsed": [
+        {
+          "name": "Gemini",
+          "usage": "ツイート本文の生成エンジン（Gemini 2.5 Flash）"
+        },
+        {
+          "name": "Claude",
+          "usage": "要件定義・設計のラリーと運用改善"
+        },
+        {
+          "name": "Codex",
+          "usage": "実装とレビューの往復"
+        }
+      ],
+      "stuckPoints": [
+        {
+          "problem": "AI が生成するツイートが単調になりやすく、多様性を保つのが難しかった。",
+          "solution": "生成の指示（プロンプト）を改善し続けるループを作り、目標とする多様性まで回し続けた。今でも改善の余地は残っている。"
+        },
+        {
+          "problem": "投稿を自動化するために、X（Twitter）の API の仕組みを理解する必要があった。",
+          "solution": "認証や投稿まわりを調べながら、自宅サーバーから安定して投稿できる形にまとめた。"
+        }
+      ],
+      "screenshots": [
+        {
+          "src": "/assets/projects/machi/profile.png",
+          "alt": "まち（@machiTWEETai）の X プロフィール"
+        }
+      ],
+      "links": [
+        {
+          "label": "X — @machiTWEETai",
+          "url": "https://x.com/machiTWEETai"
+        }
+      ],
+      "related": [],
+      "tags": ["AI", "X", "Character", "Gemini", "Japanese"],
+      "en": {
+        "title": "Machi",
+        "subtitle": "An AI character that watches fighting games (running on X)",
+        "status": "Running in public, source not open",
+        "summary": "An AI character named \"Machi\" that watches Street Fighter 6 ranked matches and posts automatically on X (Twitter).",
+        "description": "A home server generates draft tweets on a schedule, and they are posted when I press an approval button in Discord. The text is generated with Gemini, and the character is written as an AI that watches fighting games day and night. Now and then it also picks up my own activity as a developer as material to observe. Only the X account is public; the code is not open.",
+        "period": "2026-04-28 - present (moved from GitHub Actions to a home server in 2026-07)",
+        "costApprox": "About $1/month for the X API (usage-based; it stays small because posting goes through manual approval and I post by hand a lot, so automatic posting is kept minimal) plus Gemini's free tier. Baseline: Claude and Codex subscriptions (about ¥3,000/month each) are always running as a given.",
+        "aiUsed": [
+          { "usage": "The tweet text generation engine (Gemini 2.5 Flash)" },
+          { "usage": "Requirements and design rallies, and operational improvements" },
+          { "usage": "Implementation and review round-trips" }
+        ],
+        "stuckPoints": [
+          {
+            "problem": "The tweets the AI generated tended to become monotonous, and keeping them varied was hard.",
+            "solution": "I built a loop that keeps improving the generation prompt and ran it until it reached the diversity I was aiming for. There is still room to improve."
+          },
+          {
+            "problem": "To automate posting, I had to understand how the X (Twitter) API works.",
+            "solution": "I studied the authentication and posting parts and put together a setup that posts reliably from the home server."
+          }
+        ],
+        "screenshots": [
+          { "alt": "The X profile of Machi (@machiTWEETai)" }
+        ]
+      }
     }
   ]
 }

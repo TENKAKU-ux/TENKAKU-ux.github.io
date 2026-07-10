@@ -36,6 +36,7 @@ const STR = {
     projectsIntro: '公開用 allowlist に載せた作成物だけを掲載しています。',
     projectGroups: [
       { key: 'published', label: '公開しているもの', note: '誰でも試せる、ソースを公開しているもの。' },
+      { key: 'operated', label: '公開して運用しているもの', note: 'X などで公開運用していますが、ソースは非公開のもの。' },
       { key: 'local', label: '自分のパソコンで使っているもの', note: '公開はせず、自分のパソコンのみで使っているもの。' },
     ],
     backToProjects: '← 作成物一覧',
@@ -90,6 +91,7 @@ const STR = {
     projectsIntro: 'Only projects on the public allowlist are shown here.',
     projectGroups: [
       { key: 'published', label: 'Published', note: 'Open source — anyone can try them.' },
+      { key: 'operated', label: 'Running in public', note: 'Operating publicly (e.g. on X), but the source is not open.' },
       { key: 'local', label: 'On my own computer', note: 'Not released; I run these only on my own computer.' },
     ],
     backToProjects: '← All projects',
