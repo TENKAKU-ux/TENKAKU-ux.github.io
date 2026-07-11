@@ -421,7 +421,7 @@ main {
   box-shadow: var(--card-shadow);
 }
 
-.carousel img {
+.carousel .slide {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -432,7 +432,47 @@ main {
   transition: opacity .9s ease;
 }
 
-.carousel img.active { opacity: 1; }
+.carousel .slide.active { opacity: 1; }
+
+.carousel-stage {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.carousel-stage .carousel {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.carousel-arrow {
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--muted);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background .2s ease, border-color .2s ease, color .2s ease;
+}
+
+.carousel-arrow:hover {
+  background: var(--surface-2);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+@media (max-width: 520px) {
+  .carousel-stage { gap: 4px; }
+  .carousel-arrow { width: 32px; height: 32px; font-size: 1.2rem; }
+}
 
 .carousel-counter {
   position: absolute;

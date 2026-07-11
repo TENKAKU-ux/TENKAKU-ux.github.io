@@ -56,6 +56,10 @@
         {
           "src": "/assets/projects/soda-typing/analysis.png",
           "alt": "速・打の分析画面"
+        },
+        {
+          "src": "/assets/projects/soda-typing/demo.mp4",
+          "alt": "速・打のプレイのデモ動画"
         }
       ],
       "links": [
@@ -101,7 +105,8 @@
         "screenshots": [
           { "alt": "Soku-Da practice screen" },
           { "alt": "Soku-Da result screen" },
-          { "alt": "Soku-Da analysis screen" }
+          { "alt": "Soku-Da analysis screen" },
+          { "alt": "Soku-Da gameplay demo" }
         ]
       }
     },

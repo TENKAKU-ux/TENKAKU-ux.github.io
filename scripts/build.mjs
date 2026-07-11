@@ -51,6 +51,7 @@ const STR = {
     relatedAuthor: '作者',
     linksSectionHeading: 'リンク',
     carouselNext: '次のスクリーンショットへ',
+    carouselPrev: '前のスクリーンショットへ',
     carouselPick: 'スクリーンショットを選ぶ',
     carouselHint: 'タップで次へ',
     linksHeading: 'リンク集',
@@ -106,6 +107,7 @@ const STR = {
     relatedAuthor: 'By',
     linksSectionHeading: 'Links',
     carouselNext: 'Next screenshot',
+    carouselPrev: 'Previous screenshot',
     carouselPick: 'Choose a screenshot',
     carouselHint: 'Tap for next',
     linksHeading: 'Links',
@@ -255,10 +257,24 @@ function carousel(loc, project) {
   const t = STR[loc];
   const shots = project.screenshots;
   if (!shots.length) return '';
+  const isVideoSrc = (src) => /\.(mp4|webm)$/i.test(src);
+  const slideTag = (shot, i) => {
+    const active = i === 0 ? ' active' : '';
+    const alt = escapeHtml(shot.alt);
+    const src = escapeHtml(versioned(shot.src));
+    return isVideoSrc(shot.src)
+      ? `<video class="slide${active}" src="${src}" data-alt="${alt}" aria-label="${alt}" muted loop playsinline preload="metadata"></video>`
+      : `<img class="slide${active}" src="${src}" alt="${alt}" data-alt="${alt}">`;
+  };
+  const multi = shots.length > 1;
   return `<section class="anim d4">
-      <div class="carousel" role="button" tabindex="0" aria-label="${escapeHtml(t.carouselNext)}">
-        ${shots.map((shot, i) => `<img src="${escapeHtml(versioned(shot.src))}" alt="${escapeHtml(shot.alt)}"${i === 0 ? ' class="active"' : ''}>`).join('')}
-        <div class="carousel-counter"><span data-carousel-num>1</span> / ${shots.length}</div>
+      <div class="carousel-stage">
+        ${multi ? `<button type="button" class="carousel-arrow prev" data-carousel-prev aria-label="${escapeHtml(t.carouselPrev)}">‹</button>` : ''}
+        <div class="carousel" role="button" tabindex="0" aria-label="${escapeHtml(t.carouselNext)}">
+          ${shots.map(slideTag).join('')}
+          <div class="carousel-counter"><span data-carousel-num>1</span> / ${shots.length}</div>
+        </div>
+        ${multi ? `<button type="button" class="carousel-arrow next" data-carousel-next aria-label="${escapeHtml(t.carouselNext)}">›</button>` : ''}
       </div>
       <div class="carousel-bar">
         <p class="carousel-caption" data-carousel-caption>${escapeHtml(shots[0].alt)}</p>
@@ -274,28 +290,45 @@ function carousel(loc, project) {
     (() => {
       const box = document.querySelector('.carousel');
       if (!box) return;
-      const shots = Array.from(box.querySelectorAll('img'));
+      const slides = Array.from(box.querySelectorAll('.slide'));
       const dots = Array.from(document.querySelectorAll('.carousel-dots button'));
       const num = document.querySelector('[data-carousel-num]');
       const caption = document.querySelector('[data-carousel-caption]');
+      const isVideo = (el) => el.tagName === 'VIDEO';
       let current = 0;
       let timer;
       const show = (next) => {
-        current = (next + shots.length) % shots.length;
-        shots.forEach((img, i) => img.classList.toggle('active', i === current));
+        current = (next + slides.length) % slides.length;
+        slides.forEach((el, i) => {
+          const on = i === current;
+          el.classList.toggle('active', on);
+          if (isVideo(el)) {
+            if (on) { try { el.currentTime = 0; el.play(); } catch (e) {} }
+            else { el.pause(); }
+          }
+        });
         dots.forEach((dot, i) => dot.classList.toggle('active', i === current));
         num.textContent = current + 1;
-        caption.textContent = shots[current].alt;
+        caption.textContent = slides[current].dataset.alt || '';
       };
       const arm = () => {
         clearInterval(timer);
+        // 動画スライドは自動送りしない（再生を最後まで見せる）
+        if (isVideo(slides[current])) return;
         timer = setInterval(() => show(current + 1), 4000);
       };
-      box.addEventListener('click', () => { show(current + 1); arm(); });
+      const go = (d) => { show(current + d); arm(); };
+      box.addEventListener('click', () => go(1));
       box.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(current + 1); arm(); }
+        if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowRight') { e.preventDefault(); go(1); }
+        else if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
       });
+      const prev = document.querySelector('[data-carousel-prev]');
+      const next = document.querySelector('[data-carousel-next]');
+      if (prev) prev.addEventListener('click', () => go(-1));
+      if (next) next.addEventListener('click', () => go(1));
       dots.forEach((dot, i) => dot.addEventListener('click', (e) => { e.stopPropagation(); show(i); arm(); }));
+      show(0);
       arm();
     })();
     </script>`;

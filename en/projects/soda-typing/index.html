@@ -36,15 +36,19 @@
     <p class="play-cta anim d2"><a href="/play/soda-typing/" target="_blank" rel="noopener">▶ Play in your browser (no install)</a></p>
     <p class="article-cta anim d2"><a href="https://zenn.dev/tenkaku_ux/articles/soda-typing-app" target="_blank" rel="noopener">Read the full build log on Zenn →</a></p>
     <section class="anim d4">
-      <div class="carousel" role="button" tabindex="0" aria-label="Next screenshot">
-        <img src="/assets/projects/soda-typing/game.png?v=6c5ed389" alt="Soku-Da practice screen" class="active"><img src="/assets/projects/soda-typing/result.png?v=6b650155" alt="Soku-Da result screen"><img src="/assets/projects/soda-typing/analysis.png?v=786e069d" alt="Soku-Da analysis screen">
-        <div class="carousel-counter"><span data-carousel-num>1</span> / 3</div>
+      <div class="carousel-stage">
+        <button type="button" class="carousel-arrow prev" data-carousel-prev aria-label="Previous screenshot">‹</button>
+        <div class="carousel" role="button" tabindex="0" aria-label="Next screenshot">
+          <img class="slide active" src="/assets/projects/soda-typing/game.png?v=6c5ed389" alt="Soku-Da practice screen" data-alt="Soku-Da practice screen"><img class="slide" src="/assets/projects/soda-typing/result.png?v=6b650155" alt="Soku-Da result screen" data-alt="Soku-Da result screen"><img class="slide" src="/assets/projects/soda-typing/analysis.png?v=786e069d" alt="Soku-Da analysis screen" data-alt="Soku-Da analysis screen"><video class="slide" src="/assets/projects/soda-typing/demo.mp4?v=14815d8a" data-alt="Soku-Da gameplay demo" aria-label="Soku-Da gameplay demo" muted loop playsinline preload="metadata"></video>
+          <div class="carousel-counter"><span data-carousel-num>1</span> / 4</div>
+        </div>
+        <button type="button" class="carousel-arrow next" data-carousel-next aria-label="Next screenshot">›</button>
       </div>
       <div class="carousel-bar">
         <p class="carousel-caption" data-carousel-caption>Soku-Da practice screen</p>
         <div class="carousel-controls">
           <div class="carousel-dots">
-            <button type="button" aria-label="Choose a screenshot" class="active"></button><button type="button" aria-label="Choose a screenshot"></button><button type="button" aria-label="Choose a screenshot"></button>
+            <button type="button" aria-label="Choose a screenshot" class="active"></button><button type="button" aria-label="Choose a screenshot"></button><button type="button" aria-label="Choose a screenshot"></button><button type="button" aria-label="Choose a screenshot"></button>
           </div>
           <span class="carousel-hint">Tap for next</span>
         </div>
@@ -54,28 +58,45 @@
     (() => {
       const box = document.querySelector('.carousel');
       if (!box) return;
-      const shots = Array.from(box.querySelectorAll('img'));
+      const slides = Array.from(box.querySelectorAll('.slide'));
       const dots = Array.from(document.querySelectorAll('.carousel-dots button'));
       const num = document.querySelector('[data-carousel-num]');
       const caption = document.querySelector('[data-carousel-caption]');
+      const isVideo = (el) => el.tagName === 'VIDEO';
       let current = 0;
       let timer;
       const show = (next) => {
-        current = (next + shots.length) % shots.length;
-        shots.forEach((img, i) => img.classList.toggle('active', i === current));
+        current = (next + slides.length) % slides.length;
+        slides.forEach((el, i) => {
+          const on = i === current;
+          el.classList.toggle('active', on);
+          if (isVideo(el)) {
+            if (on) { try { el.currentTime = 0; el.play(); } catch (e) {} }
+            else { el.pause(); }
+          }
+        });
         dots.forEach((dot, i) => dot.classList.toggle('active', i === current));
         num.textContent = current + 1;
-        caption.textContent = shots[current].alt;
+        caption.textContent = slides[current].dataset.alt || '';
       };
       const arm = () => {
         clearInterval(timer);
+        // 動画スライドは自動送りしない（再生を最後まで見せる）
+        if (isVideo(slides[current])) return;
         timer = setInterval(() => show(current + 1), 4000);
       };
-      box.addEventListener('click', () => { show(current + 1); arm(); });
+      const go = (d) => { show(current + d); arm(); };
+      box.addEventListener('click', () => go(1));
       box.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(current + 1); arm(); }
+        if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowRight') { e.preventDefault(); go(1); }
+        else if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
       });
+      const prev = document.querySelector('[data-carousel-prev]');
+      const next = document.querySelector('[data-carousel-next]');
+      if (prev) prev.addEventListener('click', () => go(-1));
+      if (next) next.addEventListener('click', () => go(1));
       dots.forEach((dot, i) => dot.addEventListener('click', (e) => { e.stopPropagation(); show(i); arm(); }));
+      show(0);
       arm();
     })();
     </script>
