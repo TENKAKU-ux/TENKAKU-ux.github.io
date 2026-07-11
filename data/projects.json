@@ -43,12 +43,12 @@
       ],
       "screenshots": [
         {
-          "src": "/assets/projects/video-translate-ext/panel-en-ja.png",
-          "alt": "英語の動画を日本語にリアルタイム翻訳しているサイドパネル"
-        },
-        {
           "src": "/assets/projects/video-translate-ext/on-x.png",
           "alt": "X で再生中の動画を、タブを共有して翻訳しているところ"
+        },
+        {
+          "src": "/assets/projects/video-translate-ext/panel-en-ja.png",
+          "alt": "英語の動画を日本語にリアルタイム翻訳しているサイドパネル"
         },
         {
           "src": "/assets/projects/video-translate-ext/saved-records.png",
@@ -95,8 +95,8 @@
           }
         ],
         "screenshots": [
-          { "alt": "The side panel translating an English video into Japanese in real time" },
           { "alt": "Translating a video playing on X by sharing the tab" },
+          { "alt": "The side panel translating an English video into Japanese in real time" },
           { "alt": "The list of saved translation records (X, YouTube, and a Chinese video)" }
         ],
         "links": [

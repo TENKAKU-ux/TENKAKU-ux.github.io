@@ -33,7 +33,7 @@ const STR = {
     cardMore: '実録を読む →',
     articleCta: 'Zenn で制作の詳しい記録を読む →',
     projectsHeading: '作成物一覧',
-    projectsIntro: '公開用 allowlist に載せた作成物だけを掲載しています。',
+    projectsIntro: '',
     projectGroups: [
       { key: 'published', label: '公開しているもの', note: '誰でも試せる、ソースを公開しているもの。' },
       { key: 'operated', label: '運用しているもの', note: 'X などで公開運用していますが、ソースは非公開のもの。' },
@@ -53,7 +53,9 @@ const STR = {
     carouselNext: '次のスクリーンショットへ',
     carouselPrev: '前のスクリーンショットへ',
     carouselPick: 'スクリーンショットを選ぶ',
-    carouselHint: 'タップで次へ',
+    carouselHint: 'タップで拡大',
+    lightboxClose: '閉じる',
+    lightboxZoom: 'クリックで拡大／戻す',
     linksHeading: 'リンク集',
     linksIntro: 'AI と Web 開発を学ぶときに確認する公式ドキュメント中心のリンクです。',
     aboutHeading: '活動の軸',
@@ -90,7 +92,7 @@ const STR = {
     cardMore: 'Read the log →',
     articleCta: 'Read the full build log on Zenn →',
     projectsHeading: 'All projects',
-    projectsIntro: 'Only projects on the public allowlist are shown here.',
+    projectsIntro: '',
     projectGroups: [
       { key: 'published', label: 'Published', note: 'Open source — anyone can try them.' },
       { key: 'operated', label: 'In operation', note: 'Operating publicly (e.g. on X), but the source is not open.' },
@@ -110,7 +112,9 @@ const STR = {
     carouselNext: 'Next screenshot',
     carouselPrev: 'Previous screenshot',
     carouselPick: 'Choose a screenshot',
-    carouselHint: 'Tap for next',
+    carouselHint: 'Tap to enlarge',
+    lightboxClose: 'Close',
+    lightboxZoom: 'Click to zoom in / out',
     linksHeading: 'Links',
     linksIntro: 'Mostly official documentation I check while learning AI and web development.',
     aboutHeading: 'What this is about',
@@ -182,22 +186,38 @@ function escapeHtml(value) {
     .replace(/"/g, '&quot;');
 }
 
-function page(loc, title, body, description, activePath, selfPath = activePath) {
+function page(loc, title, body, description, activePath, selfPath = activePath, image) {
   const t = STR[loc];
   const base = basePath(loc);
   const fullTitle = title === 'TENKAKU-ux' ? title : `${title} | TENKAKU-ux`;
   const otherLoc = loc === 'ja' ? 'en' : 'ja';
   const switchHref = `${basePath(otherLoc)}${selfPath}`;
+  const desc = description ?? t.metaDescription;
+  const canonical = `${SITE_ORIGIN}${base}${selfPath}`;
+  const ogImage = image || `${SITE_ORIGIN}/assets/og-default.png`;
   return `<!doctype html>
 <html lang="${t.htmlLang}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="${escapeHtml(description ?? t.metaDescription)}">
+  <meta name="description" content="${escapeHtml(desc)}">
   <title>${escapeHtml(fullTitle)}</title>
+  <link rel="canonical" href="${canonical}">
   <link rel="alternate" hreflang="ja" href="${SITE_ORIGIN}${selfPath}">
   <link rel="alternate" hreflang="en" href="${SITE_ORIGIN}/en${selfPath}">
   <link rel="alternate" hreflang="x-default" href="${SITE_ORIGIN}${selfPath}">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="TENKAKU-ux">
+  <meta property="og:locale" content="${loc === 'ja' ? 'ja_JP' : 'en_US'}">
+  <meta property="og:title" content="${escapeHtml(fullTitle)}">
+  <meta property="og:description" content="${escapeHtml(desc)}">
+  <meta property="og:url" content="${canonical}">
+  <meta property="og:image" content="${escapeHtml(ogImage)}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@TINAMI_tay">
+  <meta name="twitter:title" content="${escapeHtml(fullTitle)}">
+  <meta name="twitter:description" content="${escapeHtml(desc)}">
+  <meta name="twitter:image" content="${escapeHtml(ogImage)}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
@@ -286,7 +306,7 @@ function carousel(loc, project) {
   return `<section class="anim d4">
       <div class="carousel-stage">
         ${multi ? `<button type="button" class="carousel-arrow prev" data-carousel-prev aria-label="${escapeHtml(t.carouselPrev)}">‹</button>` : ''}
-        <div class="carousel" role="button" tabindex="0" aria-label="${escapeHtml(t.carouselNext)}">
+        <div class="carousel" role="button" tabindex="0" aria-label="${escapeHtml(t.carouselHint)}">
           ${shots.map(slideTag).join('')}
           <div class="carousel-counter"><span data-carousel-num>1</span> / ${shots.length}</div>
         </div>
@@ -311,8 +331,14 @@ function carousel(loc, project) {
       const num = document.querySelector('[data-carousel-num]');
       const caption = document.querySelector('[data-carousel-caption]');
       const isVideo = (el) => el.tagName === 'VIDEO';
+      const MULTI = ${multi};
+      const L_CLOSE = ${JSON.stringify(t.lightboxClose)};
+      const L_PREV = ${JSON.stringify(t.carouselPrev)};
+      const L_NEXT = ${JSON.stringify(t.carouselNext)};
+      const L_ZOOM = ${JSON.stringify(t.lightboxZoom)};
       let current = 0;
       let timer;
+      let lbOpen = false;
       const show = (next) => {
         current = (next + slides.length) % slides.length;
         slides.forEach((el, i) => {
@@ -326,23 +352,88 @@ function carousel(loc, project) {
         dots.forEach((dot, i) => dot.classList.toggle('active', i === current));
         num.textContent = current + 1;
         caption.textContent = slides[current].dataset.alt || '';
+        if (lbOpen) renderLightbox();
       };
       const arm = () => {
         clearInterval(timer);
-        // 動画スライドは自動送りしない（再生を最後まで見せる）
-        if (isVideo(slides[current])) return;
+        if (lbOpen) return;                    // no auto-advance while the lightbox is open
+        if (isVideo(slides[current])) return;  // video slides do not auto-advance (let them play through)
         timer = setInterval(() => show(current + 1), 4000);
       };
       const go = (d) => { show(current + d); arm(); };
-      box.addEventListener('click', () => go(1));
+
+      // ===== tap to enlarge (lightbox) =====
+      const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+      const lb = document.createElement('div');
+      lb.className = 'lightbox';
+      lb.setAttribute('aria-hidden', 'true');
+      let html = '<div class="lightbox-inner">';
+      html += '<button type="button" class="lightbox-close" aria-label="' + esc(L_CLOSE) + '">×</button>';
+      if (MULTI) html += '<button type="button" class="lightbox-arrow prev" aria-label="' + esc(L_PREV) + '">‹</button>';
+      html += '<div class="lightbox-media"></div>';
+      if (MULTI) html += '<button type="button" class="lightbox-arrow next" aria-label="' + esc(L_NEXT) + '">›</button>';
+      html += '<p class="lightbox-caption"></p></div>';
+      lb.innerHTML = html;
+      document.body.appendChild(lb);
+      const lbInner = lb.querySelector('.lightbox-inner');
+      const lbMedia = lb.querySelector('.lightbox-media');
+      const lbCaption = lb.querySelector('.lightbox-caption');
+      const renderLightbox = () => {
+        const el = slides[current];
+        const alt = el.dataset.alt || '';
+        const src = el.currentSrc || el.getAttribute('src') || el.src;
+        lbMedia.classList.remove('zoomed');
+        lbMedia.innerHTML = isVideo(el)
+          ? '<video src="' + esc(src) + '" controls autoplay playsinline></video>'
+          : '<img src="' + esc(src) + '" alt="' + esc(alt) + '" title="' + esc(L_ZOOM) + '">';
+        lbCaption.textContent = alt;
+      };
+      const openLightbox = () => {
+        lbOpen = true;
+        clearInterval(timer);
+        renderLightbox();
+        lb.classList.add('open');
+        lb.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      };
+      const closeLightbox = () => {
+        if (!lbOpen) return;
+        lbOpen = false;
+        lb.classList.remove('open');
+        lb.setAttribute('aria-hidden', 'true');
+        lbMedia.innerHTML = '';
+        document.body.style.overflow = '';
+        arm();
+        try { box.focus(); } catch (e) {}
+      };
+      // tapping the backdrop closes; tapping the image toggles zoom
+      lb.addEventListener('click', (e) => {
+        if (e.target === lb || e.target === lbInner || e.target === lbMedia) { closeLightbox(); return; }
+        if (e.target.tagName === 'IMG') { lbMedia.classList.toggle('zoomed'); }
+      });
+      lb.querySelector('.lightbox-close').addEventListener('click', (e) => { e.stopPropagation(); closeLightbox(); });
+      const lbPrevBtn = lb.querySelector('.lightbox-arrow.prev');
+      const lbNextBtn = lb.querySelector('.lightbox-arrow.next');
+      if (lbPrevBtn) lbPrevBtn.addEventListener('click', (e) => { e.stopPropagation(); go(-1); });
+      if (lbNextBtn) lbNextBtn.addEventListener('click', (e) => { e.stopPropagation(); go(1); });
+
+      // inline: tap / Enter / Space to enlarge, arrow keys to move
+      box.addEventListener('click', () => openLightbox());
       box.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowRight') { e.preventDefault(); go(1); }
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(); }
+        else if (e.key === 'ArrowRight') { e.preventDefault(); go(1); }
         else if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
+      });
+      document.addEventListener('keydown', (e) => {
+        if (!lbOpen) return;
+        if (e.key === 'Escape') { closeLightbox(); }
+        else if (MULTI && e.key === 'ArrowRight') { e.preventDefault(); go(1); }
+        else if (MULTI && e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
       });
       const prev = document.querySelector('[data-carousel-prev]');
       const next = document.querySelector('[data-carousel-next]');
-      if (prev) prev.addEventListener('click', () => go(-1));
-      if (next) next.addEventListener('click', () => go(1));
+      if (prev) prev.addEventListener('click', (e) => { e.stopPropagation(); go(-1); });
+      if (next) next.addEventListener('click', (e) => { e.stopPropagation(); go(1); });
       dots.forEach((dot, i) => dot.addEventListener('click', (e) => { e.stopPropagation(); show(i); arm(); }));
       show(0);
       arm();
@@ -415,7 +506,7 @@ function projectsPage(loc, projects) {
   return page(loc, 'Projects', `<section class="page-head">
     <p class="eyebrow">Projects</p>
     <h1>${escapeHtml(t.projectsHeading)}</h1>
-    <p>${escapeHtml(t.projectsIntro)}</p>
+    ${t.projectsIntro ? `<p>${escapeHtml(t.projectsIntro)}</p>` : ''}
   </section>
   <div class="anim d4">${groupedProjects(loc, projects, { cardHeading: 'h2', titleTag: 'h2' })}</div>`, undefined, '/projects/');
 }
@@ -423,6 +514,8 @@ function projectsPage(loc, projects) {
 function projectPage(loc, project) {
   const t = STR[loc];
   const base = basePath(loc);
+  const ogShot = project.screenshots.find((s) => !/\.(mp4|webm)$/i.test(s.src));
+  const ogImage = ogShot ? `${SITE_ORIGIN}${ogShot.src}` : undefined;
   return page(loc, project.title, `<article class="project-detail">
     <p class="back-link anim d1"><a href="${base}/projects/">${escapeHtml(t.backToProjects)}</a></p>
     <header>
@@ -456,7 +549,7 @@ function projectPage(loc, project) {
       <h2>${escapeHtml(t.linksSectionHeading)}</h2>
       <ul class="plain-list">${project.links.map((link) => `<li><a href="${escapeHtml(link.url)}" target="_blank" rel="noopener">${escapeHtml(link.label)}</a></li>`).join('')}</ul>
     </section>
-  </article>`, project.summary, '/projects/', `/projects/${project.slug}/`);
+  </article>`, project.summary, '/projects/', `/projects/${project.slug}/`, ogImage);
 }
 
 function linksPage(loc, links) {

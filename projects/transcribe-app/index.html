@@ -5,9 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="講義動画などを Whisper でローカル文字起こしし、要約用プロンプトごとワンタップコピーして ChatGPT に渡せる Web アプリ。">
   <title>もじおこし | TENKAKU-ux</title>
+  <link rel="canonical" href="https://tenkaku-ux.github.io/projects/transcribe-app/">
   <link rel="alternate" hreflang="ja" href="https://tenkaku-ux.github.io/projects/transcribe-app/">
   <link rel="alternate" hreflang="en" href="https://tenkaku-ux.github.io/en/projects/transcribe-app/">
   <link rel="alternate" hreflang="x-default" href="https://tenkaku-ux.github.io/projects/transcribe-app/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="TENKAKU-ux">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="もじおこし | TENKAKU-ux">
+  <meta property="og:description" content="講義動画などを Whisper でローカル文字起こしし、要約用プロンプトごとワンタップコピーして ChatGPT に渡せる Web アプリ。">
+  <meta property="og:url" content="https://tenkaku-ux.github.io/projects/transcribe-app/">
+  <meta property="og:image" content="https://tenkaku-ux.github.io/assets/projects/transcribe-app/desktop.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@TINAMI_tay">
+  <meta name="twitter:title" content="もじおこし | TENKAKU-ux">
+  <meta name="twitter:description" content="講義動画などを Whisper でローカル文字起こしし、要約用プロンプトごとワンタップコピーして ChatGPT に渡せる Web アプリ。">
+  <meta name="twitter:image" content="https://tenkaku-ux.github.io/assets/projects/transcribe-app/desktop.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
@@ -38,7 +51,7 @@
     <section class="anim d4">
       <div class="carousel-stage">
         <button type="button" class="carousel-arrow prev" data-carousel-prev aria-label="前のスクリーンショットへ">‹</button>
-        <div class="carousel" role="button" tabindex="0" aria-label="次のスクリーンショットへ">
+        <div class="carousel" role="button" tabindex="0" aria-label="タップで拡大">
           <img class="slide active" src="/assets/projects/transcribe-app/desktop.png?v=0d7eaa7f" alt="もじおこしの完了画面（デスクトップ）" data-alt="もじおこしの完了画面（デスクトップ）"><img class="slide" src="/assets/projects/transcribe-app/mobile.png?v=ee72ebc4" alt="もじおこしのスマホ表示" data-alt="もじおこしのスマホ表示">
           <div class="carousel-counter"><span data-carousel-num>1</span> / 2</div>
         </div>
@@ -50,7 +63,7 @@
           <div class="carousel-dots">
             <button type="button" aria-label="スクリーンショットを選ぶ" class="active"></button><button type="button" aria-label="スクリーンショットを選ぶ"></button>
           </div>
-          <span class="carousel-hint">タップで次へ</span>
+          <span class="carousel-hint">タップで拡大</span>
         </div>
       </div>
     </section>
@@ -63,8 +76,14 @@
       const num = document.querySelector('[data-carousel-num]');
       const caption = document.querySelector('[data-carousel-caption]');
       const isVideo = (el) => el.tagName === 'VIDEO';
+      const MULTI = true;
+      const L_CLOSE = "閉じる";
+      const L_PREV = "前のスクリーンショットへ";
+      const L_NEXT = "次のスクリーンショットへ";
+      const L_ZOOM = "クリックで拡大／戻す";
       let current = 0;
       let timer;
+      let lbOpen = false;
       const show = (next) => {
         current = (next + slides.length) % slides.length;
         slides.forEach((el, i) => {
@@ -78,23 +97,88 @@
         dots.forEach((dot, i) => dot.classList.toggle('active', i === current));
         num.textContent = current + 1;
         caption.textContent = slides[current].dataset.alt || '';
+        if (lbOpen) renderLightbox();
       };
       const arm = () => {
         clearInterval(timer);
-        // 動画スライドは自動送りしない（再生を最後まで見せる）
-        if (isVideo(slides[current])) return;
+        if (lbOpen) return;                    // no auto-advance while the lightbox is open
+        if (isVideo(slides[current])) return;  // video slides do not auto-advance (let them play through)
         timer = setInterval(() => show(current + 1), 4000);
       };
       const go = (d) => { show(current + d); arm(); };
-      box.addEventListener('click', () => go(1));
+
+      // ===== tap to enlarge (lightbox) =====
+      const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+      const lb = document.createElement('div');
+      lb.className = 'lightbox';
+      lb.setAttribute('aria-hidden', 'true');
+      let html = '<div class="lightbox-inner">';
+      html += '<button type="button" class="lightbox-close" aria-label="' + esc(L_CLOSE) + '">×</button>';
+      if (MULTI) html += '<button type="button" class="lightbox-arrow prev" aria-label="' + esc(L_PREV) + '">‹</button>';
+      html += '<div class="lightbox-media"></div>';
+      if (MULTI) html += '<button type="button" class="lightbox-arrow next" aria-label="' + esc(L_NEXT) + '">›</button>';
+      html += '<p class="lightbox-caption"></p></div>';
+      lb.innerHTML = html;
+      document.body.appendChild(lb);
+      const lbInner = lb.querySelector('.lightbox-inner');
+      const lbMedia = lb.querySelector('.lightbox-media');
+      const lbCaption = lb.querySelector('.lightbox-caption');
+      const renderLightbox = () => {
+        const el = slides[current];
+        const alt = el.dataset.alt || '';
+        const src = el.currentSrc || el.getAttribute('src') || el.src;
+        lbMedia.classList.remove('zoomed');
+        lbMedia.innerHTML = isVideo(el)
+          ? '<video src="' + esc(src) + '" controls autoplay playsinline></video>'
+          : '<img src="' + esc(src) + '" alt="' + esc(alt) + '" title="' + esc(L_ZOOM) + '">';
+        lbCaption.textContent = alt;
+      };
+      const openLightbox = () => {
+        lbOpen = true;
+        clearInterval(timer);
+        renderLightbox();
+        lb.classList.add('open');
+        lb.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      };
+      const closeLightbox = () => {
+        if (!lbOpen) return;
+        lbOpen = false;
+        lb.classList.remove('open');
+        lb.setAttribute('aria-hidden', 'true');
+        lbMedia.innerHTML = '';
+        document.body.style.overflow = '';
+        arm();
+        try { box.focus(); } catch (e) {}
+      };
+      // tapping the backdrop closes; tapping the image toggles zoom
+      lb.addEventListener('click', (e) => {
+        if (e.target === lb || e.target === lbInner || e.target === lbMedia) { closeLightbox(); return; }
+        if (e.target.tagName === 'IMG') { lbMedia.classList.toggle('zoomed'); }
+      });
+      lb.querySelector('.lightbox-close').addEventListener('click', (e) => { e.stopPropagation(); closeLightbox(); });
+      const lbPrevBtn = lb.querySelector('.lightbox-arrow.prev');
+      const lbNextBtn = lb.querySelector('.lightbox-arrow.next');
+      if (lbPrevBtn) lbPrevBtn.addEventListener('click', (e) => { e.stopPropagation(); go(-1); });
+      if (lbNextBtn) lbNextBtn.addEventListener('click', (e) => { e.stopPropagation(); go(1); });
+
+      // inline: tap / Enter / Space to enlarge, arrow keys to move
+      box.addEventListener('click', () => openLightbox());
       box.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowRight') { e.preventDefault(); go(1); }
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(); }
+        else if (e.key === 'ArrowRight') { e.preventDefault(); go(1); }
         else if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
+      });
+      document.addEventListener('keydown', (e) => {
+        if (!lbOpen) return;
+        if (e.key === 'Escape') { closeLightbox(); }
+        else if (MULTI && e.key === 'ArrowRight') { e.preventDefault(); go(1); }
+        else if (MULTI && e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
       });
       const prev = document.querySelector('[data-carousel-prev]');
       const next = document.querySelector('[data-carousel-next]');
-      if (prev) prev.addEventListener('click', () => go(-1));
-      if (next) next.addEventListener('click', () => go(1));
+      if (prev) prev.addEventListener('click', (e) => { e.stopPropagation(); go(-1); });
+      if (next) next.addEventListener('click', (e) => { e.stopPropagation(); go(1); });
       dots.forEach((dot, i) => dot.addEventListener('click', (e) => { e.stopPropagation(); show(i); arm(); }));
       show(0);
       arm();
