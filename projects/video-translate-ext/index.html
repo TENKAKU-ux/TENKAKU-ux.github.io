@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="講義動画などを Whisper でローカル文字起こしし、要約用プロンプトごとワンタップコピーして ChatGPT に渡せる Web アプリ。">
-  <title>もじおこし | TENKAKU-ux</title>
-  <link rel="alternate" hreflang="ja" href="https://tenkaku-ux.github.io/projects/transcribe-app/">
-  <link rel="alternate" hreflang="en" href="https://tenkaku-ux.github.io/en/projects/transcribe-app/">
-  <link rel="alternate" hreflang="x-default" href="https://tenkaku-ux.github.io/projects/transcribe-app/">
+  <meta name="description" content="YouTube・X など Chrome で再生できる動画を、ブラウザ内でリアルタイムに翻訳して、サイドパネルに原文＋日本語訳を流す Chrome 拡張。英語・中国語などに対応。">
+  <title>動画リアルタイム翻訳 | TENKAKU-ux</title>
+  <link rel="alternate" hreflang="ja" href="https://tenkaku-ux.github.io/projects/video-translate-ext/">
+  <link rel="alternate" hreflang="en" href="https://tenkaku-ux.github.io/en/projects/video-translate-ext/">
+  <link rel="alternate" hreflang="x-default" href="https://tenkaku-ux.github.io/projects/video-translate-ext/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
@@ -21,7 +21,7 @@
         <nav>
           <a href="/">Home</a><a href="/projects/" class="active">Projects</a><a href="/links/">Links</a><a href="/about/">About</a>
         </nav>
-        <a class="lang-switch" href="/en/projects/transcribe-app/" hreflang="en">EN</a>
+        <a class="lang-switch" href="/en/projects/video-translate-ext/" hreflang="en">EN</a>
       </div>
     </div>
   </header>
@@ -30,25 +30,25 @@
     <p class="back-link anim d1"><a href="/projects/">← 作成物一覧</a></p>
     <header>
       <p class="eyebrow">完成・自宅で運用中</p>
-      <h1>もじおこし <span>文字起こし＋要約コピー補助</span></h1>
-      <p class="lead">動画・音声をブラウザから投入すると、ローカルの Whisper（small・CPU）が文字起こしし、進捗をリアルタイム表示します。完了後は講義ノート・要点箇条書き・試験対策の3プリセットから選び、プロンプト＋全文を一発コピーして ChatGPT に貼るだけ。履歴・txt/srt ダウンロード付き。サーバーは自宅 PC、外部 API は使いません。</p>
+      <h1>動画リアルタイム翻訳 <span>ブラウザ内で動画をその場翻訳（Chrome 拡張）</span></h1>
+      <p class="lead">YouTube・X をはじめ、Chrome で再生できる動画なら幅広く翻訳できます。字幕がある動画は画面に出ている字幕を読み取って Chrome 内蔵の翻訳（オンデバイス）で訳し、字幕が無い動画はタブの音声をローカルの Whisper で文字起こししてから訳します。英語や中国語などの動画を日本語に翻訳でき、音声や文字は端末の外へ送らず、外部 API も使いません。サイドパネルに原文と訳が並んで流れ、翻訳した記録は保存して Markdown（.md）ファイルに書き出せます。</p>
     </header>
     
-    <p class="article-cta anim d2"><a href="https://zenn.dev/tenkaku_ux/articles/mojiokoshi-transcribe-app" target="_blank" rel="noopener">Zenn で制作の詳しい記録を読む →</a></p>
+    
     <section class="anim d4">
       <div class="carousel-stage">
         <button type="button" class="carousel-arrow prev" data-carousel-prev aria-label="前のスクリーンショットへ">‹</button>
         <div class="carousel" role="button" tabindex="0" aria-label="次のスクリーンショットへ">
-          <img class="slide active" src="/assets/projects/transcribe-app/desktop.png?v=0d7eaa7f" alt="もじおこしの完了画面（デスクトップ）" data-alt="もじおこしの完了画面（デスクトップ）"><img class="slide" src="/assets/projects/transcribe-app/mobile.png?v=ee72ebc4" alt="もじおこしのスマホ表示" data-alt="もじおこしのスマホ表示">
-          <div class="carousel-counter"><span data-carousel-num>1</span> / 2</div>
+          <img class="slide active" src="/assets/projects/video-translate-ext/panel-en-ja.png?v=82c4d6e3" alt="英語の動画を日本語にリアルタイム翻訳しているサイドパネル" data-alt="英語の動画を日本語にリアルタイム翻訳しているサイドパネル"><img class="slide" src="/assets/projects/video-translate-ext/on-x.png?v=9a16633e" alt="X で再生中の動画を、タブを共有して翻訳しているところ" data-alt="X で再生中の動画を、タブを共有して翻訳しているところ"><img class="slide" src="/assets/projects/video-translate-ext/saved-records.png?v=431c3ee1" alt="翻訳した記録の一覧（X・YouTube・中国語の動画を保存）" data-alt="翻訳した記録の一覧（X・YouTube・中国語の動画を保存）">
+          <div class="carousel-counter"><span data-carousel-num>1</span> / 3</div>
         </div>
         <button type="button" class="carousel-arrow next" data-carousel-next aria-label="次のスクリーンショットへ">›</button>
       </div>
       <div class="carousel-bar">
-        <p class="carousel-caption" data-carousel-caption>もじおこしの完了画面（デスクトップ）</p>
+        <p class="carousel-caption" data-carousel-caption>英語の動画を日本語にリアルタイム翻訳しているサイドパネル</p>
         <div class="carousel-controls">
           <div class="carousel-dots">
-            <button type="button" aria-label="スクリーンショットを選ぶ" class="active"></button><button type="button" aria-label="スクリーンショットを選ぶ"></button>
+            <button type="button" aria-label="スクリーンショットを選ぶ" class="active"></button><button type="button" aria-label="スクリーンショットを選ぶ"></button><button type="button" aria-label="スクリーンショットを選ぶ"></button>
           </div>
           <span class="carousel-hint">タップで次へ</span>
         </div>
@@ -103,41 +103,41 @@
     <section class="anim d5">
       <h2>実録データ</h2>
       <dl class="facts">
-    <div><dt>制作期間</dt><dd>2026-07-05（v1 を1日で完成。前身の CLI 版は 2026-06 作成）</dd></div>
-    <div><dt>概算費用</dt><dd>0円（ローカル Whisper・外部 API 不使用）</dd></div>
-    <div><dt>使った道具</dt><dd>Python / FastAPI / Whisper / SQLite / Vanilla JS / Claude / Codex</dd></div>
+    <div><dt>制作期間</dt><dd>2026-07-11（v1 を1日で完成）</dd></div>
+    <div><dt>概算費用</dt><dd>0円（Chrome 内蔵翻訳＋ローカル Whisper・外部 API 不使用）</dd></div>
+    <div><dt>使った道具</dt><dd>Chrome Extension (MV3) / Python / WebSocket / faster-whisper / Claude / Codex</dd></div>
   </dl><p class="cost-note">※大前提として Claude / Codex のサブスク（各 月約3,000円）を常用</p>
     </section>
     <section>
       <h2>使った AI</h2>
-      <ul class="plain-list"><li><strong>Claude</strong><span>要件定義のラリーと画面デザイン（モック HTML）</span></li><li><strong>Codex</strong><span>サーバー・フロントの実装とレビュー往復</span></li><li><strong>Whisper</strong><span>文字起こしエンジン本体（small モデル・CPU 実行）</span></li></ul>
+      <ul class="plain-list"><li><strong>Claude</strong><span>要件定義のラリーと設計（Chrome 拡張の制約調査・詰まりどころの整理）</span></li><li><strong>Codex</strong><span>拡張とローカルサーバーの実装、レビューの往復</span></li><li><strong>faster-whisper</strong><span>字幕が無い動画の文字起こしエンジン（base モデル・CPU 実行）</span></li></ul>
     </section>
     <section>
       <h2>詰まった点と抜け方</h2>
       <div class="notes"><div>
         <span class="num">01</span>
         <div>
-          <h3>家庭内 LAN の HTTP ページでは navigator.clipboard が使えず、肝心のコピーが失敗する。</h3>
-          <p>execCommand によるフォールバックを用意し、それも失敗したら全選択済みテキストエリアを表示して、必ずコピー手段が残るようにした。</p>
+          <h3>サイドパネルからタブの音声をどう取り込むか。権限を付けても、音声を掴む標準の仕組みが動かず詰まった。</h3>
+          <p>サイドパネル内のボタンを押した瞬間だけ許可が下りることに気づき、そのクリックを起点に音声つきの画面共有を開始する形にした。</p>
         </div>
       </div><div>
         <span class="num">02</span>
         <div>
-          <h3>CPU での文字起こしは長時間かかるのに、標準では進捗が分からない。</h3>
-          <p>ffprobe で得た総尺と Whisper が逐次出力するセグメントのタイムスタンプから進捗率を推定し、認識中のテキストもリアルタイムで流すようにした。</p>
+          <h3>YouTube の字幕データを直接取りに行くと、中身が空で返ってくるようになっていた。</h3>
+          <p>画面に表示されている字幕を読み取る方式に切り替え、視聴者が字幕表示を ON にする前提で安定して拾えるようにした。</p>
         </div>
       </div><div>
         <span class="num">03</span>
         <div>
-          <h3>長い文字起こし全文を ChatGPT にどう渡すか迷った。</h3>
-          <p>基本はプリセットプロンプト＋全文の一発コピーとし、長文のときだけ分割コピーを選べる二段構えにした。</p>
+          <h3>拡張の常駐部分が数十秒で勝手に止まり、覚えていたはずの対象タブを忘れてしまう。</h3>
+          <p>セッション用のストレージに状態を退避し、処理の前に必ず読み直してから続けるようにした。</p>
         </div>
       </div></div>
     </section>
     
     <section>
       <h2>リンク</h2>
-      <ul class="plain-list"><li><a href="https://github.com/openai/whisper" target="_blank" rel="noopener">OpenAI Whisper（使用している音声認識モデル）</a></li></ul>
+      <ul class="plain-list"><li><a href="https://github.com/SYSTRAN/faster-whisper" target="_blank" rel="noopener">faster-whisper（使用している音声認識エンジン）</a></li><li><a href="https://developer.chrome.com/docs/ai/translator-api" target="_blank" rel="noopener">Chrome の Translator API（オンデバイス翻訳）</a></li></ul>
     </section>
   </article>
   </main>

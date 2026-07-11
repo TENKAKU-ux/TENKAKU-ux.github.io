@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A web app that transcribes lecture videos locally with Whisper, then one-tap copies the text together with a summary prompt to hand off to ChatGPT.">
-  <title>Mojiokoshi | TENKAKU-ux</title>
-  <link rel="alternate" hreflang="ja" href="https://tenkaku-ux.github.io/projects/transcribe-app/">
-  <link rel="alternate" hreflang="en" href="https://tenkaku-ux.github.io/en/projects/transcribe-app/">
-  <link rel="alternate" hreflang="x-default" href="https://tenkaku-ux.github.io/projects/transcribe-app/">
+  <meta name="description" content="A Chrome extension that translates any video playing in Chrome — YouTube, X, and more — in real time, streaming the original text and its Japanese translation into the side panel. Supports English, Chinese, and other source languages.">
+  <title>Real-time Video Translation | TENKAKU-ux</title>
+  <link rel="alternate" hreflang="ja" href="https://tenkaku-ux.github.io/projects/video-translate-ext/">
+  <link rel="alternate" hreflang="en" href="https://tenkaku-ux.github.io/en/projects/video-translate-ext/">
+  <link rel="alternate" hreflang="x-default" href="https://tenkaku-ux.github.io/projects/video-translate-ext/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
@@ -21,7 +21,7 @@
         <nav>
           <a href="/en/">Home</a><a href="/en/projects/" class="active">Projects</a><a href="/en/links/">Links</a><a href="/en/about/">About</a>
         </nav>
-        <a class="lang-switch" href="/projects/transcribe-app/" hreflang="ja">日本語</a>
+        <a class="lang-switch" href="/projects/video-translate-ext/" hreflang="ja">日本語</a>
       </div>
     </div>
   </header>
@@ -30,25 +30,25 @@
     <p class="back-link anim d1"><a href="/en/projects/">← All projects</a></p>
     <header>
       <p class="eyebrow">Finished, running at home</p>
-      <h1>Mojiokoshi <span>Transcribe + summary-copy helper</span></h1>
-      <p class="lead">Drop a video or audio file in from the browser and local Whisper (small, CPU) transcribes it, showing progress in real time. When it is done, pick from three presets — lecture notes, key bullet points, or exam prep — and one-tap copy the prompt plus the full text to paste into ChatGPT. It includes history and txt/srt downloads. The server is my home PC; no external API is used.</p>
+      <h1>Real-time Video Translation <span>Translate videos in the browser on the spot (Chrome extension)</span></h1>
+      <p class="lead">It works broadly with any video that plays in Chrome, starting with YouTube and X. For videos that have captions, it reads the captions shown on screen and translates them with Chrome's built-in on-device translation; for videos without captions, it transcribes the tab's audio locally with Whisper and then translates. It can translate English, Chinese, and other languages into Japanese, and audio and text never leave the device — no external API. The original and the translation scroll side by side in the side panel, and you can save each translation record and export it as a Markdown (.md) file.</p>
     </header>
     
-    <p class="article-cta anim d2"><a href="https://zenn.dev/tenkaku_ux/articles/mojiokoshi-transcribe-app" target="_blank" rel="noopener">Read the full build log on Zenn →</a></p>
+    
     <section class="anim d4">
       <div class="carousel-stage">
         <button type="button" class="carousel-arrow prev" data-carousel-prev aria-label="Previous screenshot">‹</button>
         <div class="carousel" role="button" tabindex="0" aria-label="Next screenshot">
-          <img class="slide active" src="/assets/projects/transcribe-app/desktop.png?v=0d7eaa7f" alt="Mojiokoshi completion screen (desktop)" data-alt="Mojiokoshi completion screen (desktop)"><img class="slide" src="/assets/projects/transcribe-app/mobile.png?v=ee72ebc4" alt="Mojiokoshi on a phone" data-alt="Mojiokoshi on a phone">
-          <div class="carousel-counter"><span data-carousel-num>1</span> / 2</div>
+          <img class="slide active" src="/assets/projects/video-translate-ext/panel-en-ja.png?v=82c4d6e3" alt="The side panel translating an English video into Japanese in real time" data-alt="The side panel translating an English video into Japanese in real time"><img class="slide" src="/assets/projects/video-translate-ext/on-x.png?v=9a16633e" alt="Translating a video playing on X by sharing the tab" data-alt="Translating a video playing on X by sharing the tab"><img class="slide" src="/assets/projects/video-translate-ext/saved-records.png?v=431c3ee1" alt="The list of saved translation records (X, YouTube, and a Chinese video)" data-alt="The list of saved translation records (X, YouTube, and a Chinese video)">
+          <div class="carousel-counter"><span data-carousel-num>1</span> / 3</div>
         </div>
         <button type="button" class="carousel-arrow next" data-carousel-next aria-label="Next screenshot">›</button>
       </div>
       <div class="carousel-bar">
-        <p class="carousel-caption" data-carousel-caption>Mojiokoshi completion screen (desktop)</p>
+        <p class="carousel-caption" data-carousel-caption>The side panel translating an English video into Japanese in real time</p>
         <div class="carousel-controls">
           <div class="carousel-dots">
-            <button type="button" aria-label="Choose a screenshot" class="active"></button><button type="button" aria-label="Choose a screenshot"></button>
+            <button type="button" aria-label="Choose a screenshot" class="active"></button><button type="button" aria-label="Choose a screenshot"></button><button type="button" aria-label="Choose a screenshot"></button>
           </div>
           <span class="carousel-hint">Tap for next</span>
         </div>
@@ -103,41 +103,41 @@
     <section class="anim d5">
       <h2>The record</h2>
       <dl class="facts">
-    <div><dt>Build period</dt><dd>2026-07-05 (v1 built in a day; the earlier CLI version was made in 2026-06)</dd></div>
-    <div><dt>Rough cost</dt><dd>¥0 (local Whisper, no external API).</dd></div>
-    <div><dt>Tools used</dt><dd>Python / FastAPI / Whisper / SQLite / Vanilla JS / Claude / Codex</dd></div>
+    <div><dt>Build period</dt><dd>2026-07-11 (v1 built in a day)</dd></div>
+    <div><dt>Rough cost</dt><dd>¥0 (Chrome's built-in translation plus local Whisper, no external API).</dd></div>
+    <div><dt>Tools used</dt><dd>Chrome Extension (MV3) / Python / WebSocket / faster-whisper / Claude / Codex</dd></div>
   </dl><p class="cost-note">Baseline: Claude and Codex subscriptions (about ¥3,000/month each) are always running as a given.</p>
     </section>
     <section>
       <h2>AI used</h2>
-      <ul class="plain-list"><li><strong>Claude</strong><span>Requirements rallies and screen design (mock HTML)</span></li><li><strong>Codex</strong><span>Implementing the server and frontend, and review round-trips</span></li><li><strong>Whisper</strong><span>The transcription engine itself (small model, CPU)</span></li></ul>
+      <ul class="plain-list"><li><strong>Claude</strong><span>Requirements rallies and design (researching the extension's constraints and organizing the sticking points)</span></li><li><strong>Codex</strong><span>Implementing the extension and the local server, and review round-trips</span></li><li><strong>faster-whisper</strong><span>The transcription engine for videos without captions (base model, CPU)</span></li></ul>
     </section>
     <section>
       <h2>Where I got stuck, and how I got out</h2>
       <div class="notes"><div>
         <span class="num">01</span>
         <div>
-          <h3>On an HTTP page over the home LAN, navigator.clipboard is not available, so the crucial copy fails.</h3>
-          <p>I added an execCommand fallback, and if that also fails, it shows a pre-selected textarea, so a way to copy always remains.</p>
+          <h3>How to capture the tab's audio from the side panel. Even with permissions granted, the standard way to grab audio would not work.</h3>
+          <p>I realized the permission is only granted at the instant a button inside the side panel is pressed, so I start audio-included screen sharing from that click.</p>
         </div>
       </div><div>
         <span class="num">02</span>
         <div>
-          <h3>Transcribing on CPU takes a long time, yet by default there is no way to see progress.</h3>
-          <p>I estimate progress from the total length via ffprobe and the timestamps of the segments Whisper emits one by one, and stream the text being recognized in real time too.</p>
+          <h3>Fetching YouTube's caption data directly had started returning empty bodies.</h3>
+          <p>I switched to reading the captions shown on screen, and made it reliable on the assumption the viewer turns captions on.</p>
         </div>
       </div><div>
         <span class="num">03</span>
         <div>
-          <h3>I was not sure how to hand a long full transcript over to ChatGPT.</h3>
-          <p>The default is a one-tap copy of the preset prompt plus the full text, with a second option to copy in chunks only when the text is long.</p>
+          <h3>The extension's background part gets killed after tens of seconds and forgets the target tab it was supposed to remember.</h3>
+          <p>I stash the state in session storage and always reload it before continuing.</p>
         </div>
       </div></div>
     </section>
     
     <section>
       <h2>Links</h2>
-      <ul class="plain-list"><li><a href="https://github.com/openai/whisper" target="_blank" rel="noopener">OpenAI Whisper (the speech recognition model used)</a></li></ul>
+      <ul class="plain-list"><li><a href="https://github.com/SYSTRAN/faster-whisper" target="_blank" rel="noopener">faster-whisper (the speech recognition engine used)</a></li><li><a href="https://developer.chrome.com/docs/ai/translator-api" target="_blank" rel="noopener">Chrome's Translator API (on-device translation)</a></li></ul>
     </section>
   </article>
   </main>

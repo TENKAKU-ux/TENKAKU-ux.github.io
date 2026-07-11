@@ -1,7 +1,110 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-07-09",
+  "updated": "2026-07-12",
   "projects": [
+    {
+      "slug": "video-translate-ext",
+      "category": "local",
+      "title": "動画リアルタイム翻訳",
+      "subtitle": "ブラウザ内で動画をその場翻訳（Chrome 拡張）",
+      "status": "完成・自宅で運用中",
+      "summary": "YouTube・X など Chrome で再生できる動画を、ブラウザ内でリアルタイムに翻訳して、サイドパネルに原文＋日本語訳を流す Chrome 拡張。英語・中国語などに対応。",
+      "description": "YouTube・X をはじめ、Chrome で再生できる動画なら幅広く翻訳できます。字幕がある動画は画面に出ている字幕を読み取って Chrome 内蔵の翻訳（オンデバイス）で訳し、字幕が無い動画はタブの音声をローカルの Whisper で文字起こししてから訳します。英語や中国語などの動画を日本語に翻訳でき、音声や文字は端末の外へ送らず、外部 API も使いません。サイドパネルに原文と訳が並んで流れ、翻訳した記録は保存して Markdown（.md）ファイルに書き出せます。",
+      "period": "2026-07-11（v1 を1日で完成）",
+      "costApprox": "0円（Chrome 内蔵翻訳＋ローカル Whisper・外部 API 不使用）※大前提として Claude / Codex のサブスク（各 月約3,000円）を常用",
+      "tools": ["Chrome Extension (MV3)", "Python", "WebSocket", "faster-whisper", "Claude", "Codex"],
+      "aiUsed": [
+        {
+          "name": "Claude",
+          "usage": "要件定義のラリーと設計（Chrome 拡張の制約調査・詰まりどころの整理）"
+        },
+        {
+          "name": "Codex",
+          "usage": "拡張とローカルサーバーの実装、レビューの往復"
+        },
+        {
+          "name": "faster-whisper",
+          "usage": "字幕が無い動画の文字起こしエンジン（base モデル・CPU 実行）"
+        }
+      ],
+      "stuckPoints": [
+        {
+          "problem": "サイドパネルからタブの音声をどう取り込むか。権限を付けても、音声を掴む標準の仕組みが動かず詰まった。",
+          "solution": "サイドパネル内のボタンを押した瞬間だけ許可が下りることに気づき、そのクリックを起点に音声つきの画面共有を開始する形にした。"
+        },
+        {
+          "problem": "YouTube の字幕データを直接取りに行くと、中身が空で返ってくるようになっていた。",
+          "solution": "画面に表示されている字幕を読み取る方式に切り替え、視聴者が字幕表示を ON にする前提で安定して拾えるようにした。"
+        },
+        {
+          "problem": "拡張の常駐部分が数十秒で勝手に止まり、覚えていたはずの対象タブを忘れてしまう。",
+          "solution": "セッション用のストレージに状態を退避し、処理の前に必ず読み直してから続けるようにした。"
+        }
+      ],
+      "screenshots": [
+        {
+          "src": "/assets/projects/video-translate-ext/panel-en-ja.png",
+          "alt": "英語の動画を日本語にリアルタイム翻訳しているサイドパネル"
+        },
+        {
+          "src": "/assets/projects/video-translate-ext/on-x.png",
+          "alt": "X で再生中の動画を、タブを共有して翻訳しているところ"
+        },
+        {
+          "src": "/assets/projects/video-translate-ext/saved-records.png",
+          "alt": "翻訳した記録の一覧（X・YouTube・中国語の動画を保存）"
+        }
+      ],
+      "links": [
+        {
+          "label": "faster-whisper（使用している音声認識エンジン）",
+          "url": "https://github.com/SYSTRAN/faster-whisper"
+        },
+        {
+          "label": "Chrome の Translator API（オンデバイス翻訳）",
+          "url": "https://developer.chrome.com/docs/ai/translator-api"
+        }
+      ],
+      "related": [],
+      "tags": ["Chrome Extension", "Translation", "Whisper", "Multilingual", "Local", "Japanese"],
+      "en": {
+        "title": "Real-time Video Translation",
+        "subtitle": "Translate videos in the browser on the spot (Chrome extension)",
+        "status": "Finished, running at home",
+        "summary": "A Chrome extension that translates any video playing in Chrome — YouTube, X, and more — in real time, streaming the original text and its Japanese translation into the side panel. Supports English, Chinese, and other source languages.",
+        "description": "It works broadly with any video that plays in Chrome, starting with YouTube and X. For videos that have captions, it reads the captions shown on screen and translates them with Chrome's built-in on-device translation; for videos without captions, it transcribes the tab's audio locally with Whisper and then translates. It can translate English, Chinese, and other languages into Japanese, and audio and text never leave the device — no external API. The original and the translation scroll side by side in the side panel, and you can save each translation record and export it as a Markdown (.md) file.",
+        "period": "2026-07-11 (v1 built in a day)",
+        "costApprox": "¥0 (Chrome's built-in translation plus local Whisper, no external API). Baseline: Claude and Codex subscriptions (about ¥3,000/month each) are always running as a given.",
+        "aiUsed": [
+          { "usage": "Requirements rallies and design (researching the extension's constraints and organizing the sticking points)" },
+          { "usage": "Implementing the extension and the local server, and review round-trips" },
+          { "usage": "The transcription engine for videos without captions (base model, CPU)" }
+        ],
+        "stuckPoints": [
+          {
+            "problem": "How to capture the tab's audio from the side panel. Even with permissions granted, the standard way to grab audio would not work.",
+            "solution": "I realized the permission is only granted at the instant a button inside the side panel is pressed, so I start audio-included screen sharing from that click."
+          },
+          {
+            "problem": "Fetching YouTube's caption data directly had started returning empty bodies.",
+            "solution": "I switched to reading the captions shown on screen, and made it reliable on the assumption the viewer turns captions on."
+          },
+          {
+            "problem": "The extension's background part gets killed after tens of seconds and forgets the target tab it was supposed to remember.",
+            "solution": "I stash the state in session storage and always reload it before continuing."
+          }
+        ],
+        "screenshots": [
+          { "alt": "The side panel translating an English video into Japanese in real time" },
+          { "alt": "Translating a video playing on X by sharing the tab" },
+          { "alt": "The list of saved translation records (X, YouTube, and a Chinese video)" }
+        ],
+        "links": [
+          { "label": "faster-whisper (the speech recognition engine used)" },
+          { "label": "Chrome's Translator API (on-device translation)" }
+        ]
+      }
+    },
     {
       "slug": "soda-typing",
       "category": "published",

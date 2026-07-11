@@ -68,6 +68,7 @@ const STR = {
       ['2026-07-09', '「もじおこし」を追加'],
       ['2026-07-10', '「速・打」のブラウザ版を公開'],
       ['2026-07-10', 'AI キャラクター「まち」を追加'],
+      ['2026-07-12', '「動画リアルタイム翻訳」を追加'],
     ],
   },
   en: {
@@ -124,6 +125,7 @@ const STR = {
       ['2026-07-09', 'Added Mojiokoshi'],
       ['2026-07-10', 'Released the browser version of Soku-Da'],
       ['2026-07-10', 'Added Machi, the AI character'],
+      ['2026-07-12', 'Added Real-time Video Translation'],
     ],
   },
 };
@@ -244,13 +246,27 @@ function projectCard(loc, project, headingLevel = 'h2') {
   </article>`;
 }
 
+// 費用欄の「大前提としてサブスクを常用」の但し書きを本体費用から切り離す。
+// 費用の数字だけを枠内に太字で見せ、共通の但し書きは枠外に小さく薄く回す（2026-07-12 指示）。
+function splitCost(costApprox) {
+  const markers = ['※大前提', 'Baseline:'];
+  for (const m of markers) {
+    const idx = costApprox.indexOf(m);
+    if (idx >= 0) {
+      return { main: costApprox.slice(0, idx).trim(), note: costApprox.slice(idx).trim() };
+    }
+  }
+  return { main: costApprox, note: '' };
+}
+
 function factList(loc, project) {
   const t = STR[loc];
+  const { main, note } = splitCost(project.costApprox);
   return `<dl class="facts">
     <div><dt>${escapeHtml(t.factPeriod)}</dt><dd>${escapeHtml(project.period)}</dd></div>
-    <div><dt>${escapeHtml(t.factCost)}</dt><dd>${escapeHtml(project.costApprox)}</dd></div>
+    <div><dt>${escapeHtml(t.factCost)}</dt><dd>${escapeHtml(main)}</dd></div>
     <div><dt>${escapeHtml(t.factTools)}</dt><dd>${project.tools.map(escapeHtml).join(' / ')}</dd></div>
-  </dl>`;
+  </dl>${note ? `<p class="cost-note">${escapeHtml(note)}</p>` : ''}`;
 }
 
 function carousel(loc, project) {
