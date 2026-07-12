@@ -10,6 +10,9 @@
       "status": "完成・自宅で運用中",
       "summary": "YouTube・X など Chrome で再生できる動画を、ブラウザ内でリアルタイムに翻訳して、サイドパネルに原文＋日本語訳を流す Chrome 拡張。英語・中国語などに対応。",
       "description": "YouTube・X をはじめ、Chrome で再生できる動画なら幅広く翻訳できます。字幕がある動画は画面に出ている字幕を読み取って Chrome 内蔵の翻訳（オンデバイス）で訳し、字幕が無い動画はタブの音声をローカルの Whisper で文字起こししてから訳します。英語や中国語などの動画を日本語に翻訳でき、音声や文字は端末の外へ送らず、外部 API も使いません。サイドパネルに原文と訳が並んで流れ、翻訳した記録は保存して Markdown（.md）ファイルに書き出せます。",
+      "article": {
+        "url": "https://zenn.dev/tenkaku_ux/articles/video-translate-ext"
+      },
       "period": "2026-07-11（v1 を1日で完成）",
       "costApprox": "0円（Chrome 内蔵翻訳＋ローカル Whisper・外部 API 不使用）※大前提として Claude / Codex のサブスク（各 月約3,000円）を常用",
       "tools": ["Chrome Extension (MV3)", "Python", "WebSocket", "faster-whisper", "Claude", "Codex"],
