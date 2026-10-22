@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="総務省の公表データから、全国1,788の自治体ごとに、ふるさと納税の受入額・募集費用・住民税控除額と、その差額を地図と表で確かめられる Web サイト。">
+  <title>ふるさと納税マップ | TENKAKU-ux</title>
+  <link rel="canonical" href="https://tenkaku-ux.github.io/projects/furusato-map/">
+  <link rel="alternate" hreflang="ja" href="https://tenkaku-ux.github.io/projects/furusato-map/">
+  <link rel="alternate" hreflang="en" href="https://tenkaku-ux.github.io/en/projects/furusato-map/">
+  <link rel="alternate" hreflang="x-default" href="https://tenkaku-ux.github.io/projects/furusato-map/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="TENKAKU-ux">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="ふるさと納税マップ | TENKAKU-ux">
+  <meta property="og:description" content="総務省の公表データから、全国1,788の自治体ごとに、ふるさと納税の受入額・募集費用・住民税控除額と、その差額を地図と表で確かめられる Web サイト。">
+  <meta property="og:url" content="https://tenkaku-ux.github.io/projects/furusato-map/">
+  <meta property="og:image" content="https://tenkaku-ux.github.io/assets/projects/furusato-map/home.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@TINAMI_tay">
+  <meta name="twitter:title" content="ふるさと納税マップ | TENKAKU-ux">
+  <meta name="twitter:description" content="総務省の公表データから、全国1,788の自治体ごとに、ふるさと納税の受入額・募集費用・住民税控除額と、その差額を地図と表で確かめられる Web サイト。">
+  <meta name="twitter:image" content="https://tenkaku-ux.github.io/assets/projects/furusato-map/home.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="/">TENKAKU-ux</a>
+      <div class="nav-group">
+        <nav>
+          <a href="/">Home</a><a href="/projects/" class="active">Projects</a><a href="/links/">Links</a><a href="/about/">About</a>
+        </nav>
+        <a class="lang-switch" href="/en/projects/furusato-map/" hreflang="en">EN</a>
+      </div>
+    </div>
+  </header>
+  <main class="wrap">
+    <article class="project-detail">
+    <p class="back-link anim d1"><a href="/projects/">← 作成物一覧</a></p>
+    <header>
+      <p class="eyebrow">公開中</p>
+      <h1>ふるさと納税マップ <span>自治体の収支を地図で見る</span></h1>
+      <p class="lead">ふるさと納税で寄附を集めている自治体がある一方で、住民が他の自治体へ寄附すると、その分だけ住民税が減る自治体もあります。このサイトでは、総務省の「ふるさと納税に関する現況調査結果」をもとに、自治体ごとの受入額と住民税の控除額を並べ、その差額を日本地図の色分けや全国の順位で見られるようにしました。人口1人あたりの額、募集費用の中身、受入額の推移（平成20年度から）も見られ、ページの URL をそのまま共有できます。また、AI エージェントが同じデータを調べられるように、ブラウザ向けの WebMCP と、Claude Code などに登録できる MCP サーバーも用意しています。非公式のサイトで、出典は総務省・e-Stat・国土地理院です。</p>
+    </header>
+    <p class="play-cta anim d2"><a href="https://tenkaku-ux.github.io/furusato-map/" target="_blank" rel="noopener">▶ サイトを開く</a></p>
+    
+    <section class="anim d4">
+      <div class="carousel-stage">
+        <button type="button" class="carousel-arrow prev" data-carousel-prev aria-label="前のスクリーンショットへ">‹</button>
+        <div class="carousel" role="button" tabindex="0" aria-label="タップで拡大">
+          <img class="slide active" src="/assets/projects/furusato-map/home.png?v=4d0dd9b0" alt="トップページ。都道府県ごとの受入額で色分けした日本地図" data-alt="トップページ。都道府県ごとの受入額で色分けした日本地図"><img class="slide" src="/assets/projects/furusato-map/setagaya.png?v=05026d99" alt="世田谷区のページ。受入額・募集費用・住民税控除額・差額と全国順位" data-alt="世田谷区のページ。受入額・募集費用・住民税控除額・差額と全国順位"><img class="slide" src="/assets/projects/furusato-map/tokyo-map.png?v=f3df6c60" alt="東京都の市区町村を受入額で色分けした地図" data-alt="東京都の市区町村を受入額で色分けした地図">
+          <div class="carousel-counter"><span data-carousel-num>1</span> / 3</div>
+        </div>
+        <button type="button" class="carousel-arrow next" data-carousel-next aria-label="次のスクリーンショットへ">›</button>
+      </div>
+      <div class="carousel-bar">
+        <p class="carousel-caption" data-carousel-caption>トップページ。都道府県ごとの受入額で色分けした日本地図</p>
+        <div class="carousel-controls">
+          <div class="carousel-dots">
+            <button type="button" aria-label="スクリーンショットを選ぶ" class="active"></button><button type="button" aria-label="スクリーンショットを選ぶ"></button><button type="button" aria-label="スクリーンショットを選ぶ"></button>
+          </div>
+          <span class="carousel-hint">タップで拡大</span>
+        </div>
+      </div>
+    </section>
+    <script>
+    (() => {
+      const box = document.querySelector('.carousel');
+      if (!box) return;
+      const slides = Array.from(box.querySelectorAll('.slide'));
+      const dots = Array.from(document.querySelectorAll('.carousel-dots button'));
+      const num = document.querySelector('[data-carousel-num]');
+      const caption = document.querySelector('[data-carousel-caption]');
+      const isVideo = (el) => el.tagName === 'VIDEO';
+      const MULTI = true;
+      const L_CLOSE = "閉じる";
+      const L_PREV = "前のスクリーンショットへ";
+      const L_NEXT = "次のスクリーンショットへ";
+      const L_ZOOM = "クリックで拡大／戻す";
+      let current = 0;
+      let timer;
+      let lbOpen = false;
+      const show = (next) => {
+        current = (next + slides.length) % slides.length;
+        slides.forEach((el, i) => {
+          const on = i === current;
+          el.classList.toggle('active', on);
+          if (isVideo(el)) {
+            if (on) { try { el.currentTime = 0; el.play(); } catch (e) {} }
+            else { el.pause(); }
+          }
+        });
+        dots.forEach((dot, i) => dot.classList.toggle('active', i === current));
+        num.textContent = current + 1;
+        caption.textContent = slides[current].dataset.alt || '';
+        if (lbOpen) renderLightbox();
+      };
+      const arm = () => {
+        clearInterval(timer);
+        if (lbOpen) return;                    // no auto-advance while the lightbox is open
+        if (isVideo(slides[current])) return;  // video slides do not auto-advance (let them play through)
+        timer = setInterval(() => show(current + 1), 4000);
+      };
+      const go = (d) => { show(current + d); arm(); };
+
+      // ===== tap to enlarge (lightbox) =====
+      const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+      const lb = document.createElement('div');
+      lb.className = 'lightbox';
+      lb.setAttribute('aria-hidden', 'true');
+      let html = '<div class="lightbox-inner">';
+      html += '<button type="button" class="lightbox-close" aria-label="' + esc(L_CLOSE) + '">×</button>';
+      if (MULTI) html += '<button type="button" class="lightbox-arrow prev" aria-label="' + esc(L_PREV) + '">‹</button>';
+      html += '<div class="lightbox-media"></div>';
+      if (MULTI) html += '<button type="button" class="lightbox-arrow next" aria-label="' + esc(L_NEXT) + '">›</button>';
+      html += '<p class="lightbox-caption"></p></div>';
+      lb.innerHTML = html;
+      document.body.appendChild(lb);
+      const lbInner = lb.querySelector('.lightbox-inner');
+      const lbMedia = lb.querySelector('.lightbox-media');
+      const lbCaption = lb.querySelector('.lightbox-caption');
+      const renderLightbox = () => {
+        const el = slides[current];
+        const alt = el.dataset.alt || '';
+        const src = el.currentSrc || el.getAttribute('src') || el.src;
+        lbMedia.classList.remove('zoomed');
+        lbMedia.innerHTML = isVideo(el)
+          ? '<video src="' + esc(src) + '" controls autoplay playsinline></video>'
+          : '<img src="' + esc(src) + '" alt="' + esc(alt) + '" title="' + esc(L_ZOOM) + '">';
+        lbCaption.textContent = alt;
+      };
+      const openLightbox = () => {
+        lbOpen = true;
+        clearInterval(timer);
+        renderLightbox();
+        lb.classList.add('open');
+        lb.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      };
+      const closeLightbox = () => {
+        if (!lbOpen) return;
+        lbOpen = false;
+        lb.classList.remove('open');
+        lb.setAttribute('aria-hidden', 'true');
+        lbMedia.innerHTML = '';
+        document.body.style.overflow = '';
+        arm();
+        try { box.focus(); } catch (e) {}
+      };
+      // tapping the backdrop closes; tapping the image toggles zoom
+      lb.addEventListener('click', (e) => {
+        if (e.target === lb || e.target === lbInner || e.target === lbMedia) { closeLightbox(); return; }
+        if (e.target.tagName === 'IMG') { lbMedia.classList.toggle('zoomed'); }
+      });
+      lb.querySelector('.lightbox-close').addEventListener('click', (e) => { e.stopPropagation(); closeLightbox(); });
+      const lbPrevBtn = lb.querySelector('.lightbox-arrow.prev');
+      const lbNextBtn = lb.querySelector('.lightbox-arrow.next');
+      if (lbPrevBtn) lbPrevBtn.addEventListener('click', (e) => { e.stopPropagation(); go(-1); });
+      if (lbNextBtn) lbNextBtn.addEventListener('click', (e) => { e.stopPropagation(); go(1); });
+
+      // inline: tap / Enter / Space to enlarge, arrow keys to move
+      box.addEventListener('click', () => openLightbox());
+      box.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(); }
+        else if (e.key === 'ArrowRight') { e.preventDefault(); go(1); }
+        else if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
+      });
+      document.addEventListener('keydown', (e) => {
+        if (!lbOpen) return;
+        if (e.key === 'Escape') { closeLightbox(); }
+        else if (MULTI && e.key === 'ArrowRight') { e.preventDefault(); go(1); }
+        else if (MULTI && e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
+      });
+      const prev = document.querySelector('[data-carousel-prev]');
+      const next = document.querySelector('[data-carousel-next]');
+      if (prev) prev.addEventListener('click', (e) => { e.stopPropagation(); go(-1); });
+      if (next) next.addEventListener('click', (e) => { e.stopPropagation(); go(1); });
+      dots.forEach((dot, i) => dot.addEventListener('click', (e) => { e.stopPropagation(); show(i); arm(); }));
+      show(0);
+      arm();
+    })();
+    </script>
+    <section class="anim d5">
+      <h2>実録データ</h2>
+      <dl class="facts">
+    <div><dt>制作期間</dt><dd>2026-10-13 〜 2026-10-22（10-18 に初版、10-22 に公開）</dd></div>
+    <div><dt>概算費用</dt><dd>0円（公開データと GitHub Pages のみ・外部 API 不使用）</dd></div>
+    <div><dt>使った道具</dt><dd>TypeScript / Vite / Python / GitHub Pages / MCP / Claude / Codex</dd></div>
+  </dl><p class="cost-note">※大前提として Claude / Codex のサブスク（各 月約3,000円）を常用</p>
+    </section>
+    <section>
+      <h2>使った AI</h2>
+      <ul class="plain-list"><li><strong>Claude</strong><span>画面と地図の実装、MCP サーバーの実装、ブラウザでの操作テスト</span></li><li><strong>Codex</strong><span>総務省の Excel を読み込むデータ処理と検算、計画の共同議論とレビュー</span></li></ul>
+    </section>
+    <section>
+      <h2>詰まった点と抜け方</h2>
+      <div class="notes"><div>
+        <span class="num">01</span>
+        <div>
+          <h3>都道府県と市区町村の数字をそのまま足すと、住民税の控除額が二重に数えられてしまう。</h3>
+          <p>都道府県と市区町村を別の表に分け、全国の合計と47都道府県の値が総務省の報道資料と一致するかをテストで毎回確かめるようにした。</p>
+        </div>
+      </div><div>
+        <span class="num">02</span>
+        <div>
+          <h3>日本地図に離島まで正しい位置で描くと、本土が小さくなって見づらい。距離で自動的に外す方法では、本土の市町村まで外れてしまった。</h3>
+          <p>遠い島だけを名前で指定し、地図の外に名前のボタンとして並べる形にした。</p>
+        </div>
+      </div><div>
+        <span class="num">03</span>
+        <div>
+          <h3>地図の元データが2016年のもので、その後に市になった自治体はコードが変わっていて、色が塗られなかった。</h3>
+          <p>変わったコードを読み替える表を作り、すべての自治体に色が付くことを確かめた。</p>
+        </div>
+      </div></div>
+    </section>
+    
+    <section>
+      <h2>リンク</h2>
+      <ul class="plain-list"><li><a href="https://github.com/TENKAKU-ux/furusato-map" target="_blank" rel="noopener">GitHub — furusato-map</a></li></ul>
+    </section>
+  </article>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>GitHub: <a href="https://github.com/TENKAKU-ux" target="_blank" rel="noopener">TENKAKU-ux</a></span>
+      <span>X: <a href="https://x.com/TINAMI_tay" target="_blank" rel="noopener">@TINAMI_tay</a></span>
+      <span>Zenn: <a href="https://zenn.dev/tenkaku_ux" target="_blank" rel="noopener">tenkaku_ux</a></span>
+    </div>
+  </footer>
+</body>
+</html>

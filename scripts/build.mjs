@@ -71,6 +71,7 @@ const STR = {
       ['2026-07-10', '「速・打」のブラウザ版を公開'],
       ['2026-07-10', 'AI キャラクター「まち」を追加'],
       ['2026-07-12', '「動画リアルタイム翻訳」を追加'],
+      ['2026-10-22', '「ふるさと納税マップ」を追加'],
     ],
   },
   en: {
@@ -130,6 +131,7 @@ const STR = {
       ['2026-07-10', 'Released the browser version of Soku-Da'],
       ['2026-07-10', 'Added Machi, the AI character'],
       ['2026-07-12', 'Added Real-time Video Translation'],
+      ['2026-10-22', 'Added Furusato Nozei Map'],
     ],
   },
 };

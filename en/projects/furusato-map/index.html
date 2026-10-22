@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A website that uses data published by Japan's Ministry of Internal Affairs and Communications to show, for each of 1,788 local governments, the donations received under the hometown tax (furusato nozei) program, the cost of soliciting them, the resident tax deductions, and the difference, on a map and in tables.">
+  <title>Furusato Nozei Map | TENKAKU-ux</title>
+  <link rel="canonical" href="https://tenkaku-ux.github.io/en/projects/furusato-map/">
+  <link rel="alternate" hreflang="ja" href="https://tenkaku-ux.github.io/projects/furusato-map/">
+  <link rel="alternate" hreflang="en" href="https://tenkaku-ux.github.io/en/projects/furusato-map/">
+  <link rel="alternate" hreflang="x-default" href="https://tenkaku-ux.github.io/projects/furusato-map/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="TENKAKU-ux">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Furusato Nozei Map | TENKAKU-ux">
+  <meta property="og:description" content="A website that uses data published by Japan's Ministry of Internal Affairs and Communications to show, for each of 1,788 local governments, the donations received under the hometown tax (furusato nozei) program, the cost of soliciting them, the resident tax deductions, and the difference, on a map and in tables.">
+  <meta property="og:url" content="https://tenkaku-ux.github.io/en/projects/furusato-map/">
+  <meta property="og:image" content="https://tenkaku-ux.github.io/assets/projects/furusato-map/home.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@TINAMI_tay">
+  <meta name="twitter:title" content="Furusato Nozei Map | TENKAKU-ux">
+  <meta name="twitter:description" content="A website that uses data published by Japan's Ministry of Internal Affairs and Communications to show, for each of 1,788 local governments, the donations received under the hometown tax (furusato nozei) program, the cost of soliciting them, the resident tax deductions, and the difference, on a map and in tables.">
+  <meta name="twitter:image" content="https://tenkaku-ux.github.io/assets/projects/furusato-map/home.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="/en/">TENKAKU-ux</a>
+      <div class="nav-group">
+        <nav>
+          <a href="/en/">Home</a><a href="/en/projects/" class="active">Projects</a><a href="/en/links/">Links</a><a href="/en/about/">About</a>
+        </nav>
+        <a class="lang-switch" href="/projects/furusato-map/" hreflang="ja">日本語</a>
+      </div>
+    </div>
+  </header>
+  <main class="wrap">
+    <article class="project-detail">
+    <p class="back-link anim d1"><a href="/en/projects/">← All projects</a></p>
+    <header>
+      <p class="eyebrow">Live</p>
+      <h1>Furusato Nozei Map <span>Hometown tax balances on a map</span></h1>
+      <p class="lead">Some local governments collect large donations through the hometown tax program, while others lose resident tax revenue when their residents donate elsewhere. Based on the Ministry's survey of the program, this site puts each local government's donations received next to its resident tax deductions and shows the difference as a color-coded map of Japan and nationwide rankings. You can also see per-capita figures, a breakdown of solicitation costs, and how donations have changed since fiscal 2008, and every page has a shareable URL. So that AI agents can look up the same data, it also offers WebMCP tools in the browser and an MCP server you can register in tools such as Claude Code. The site is unofficial, and its sources are the Ministry of Internal Affairs and Communications, e-Stat, and the Geospatial Information Authority of Japan. The site itself is in Japanese.</p>
+    </header>
+    <p class="play-cta anim d2"><a href="https://tenkaku-ux.github.io/furusato-map/" target="_blank" rel="noopener">▶ Open the site (Japanese)</a></p>
+    
+    <section class="anim d4">
+      <div class="carousel-stage">
+        <button type="button" class="carousel-arrow prev" data-carousel-prev aria-label="Previous screenshot">‹</button>
+        <div class="carousel" role="button" tabindex="0" aria-label="Tap to enlarge">
+          <img class="slide active" src="/assets/projects/furusato-map/home.png?v=4d0dd9b0" alt="Top page: a map of Japan colored by donations received per prefecture" data-alt="Top page: a map of Japan colored by donations received per prefecture"><img class="slide" src="/assets/projects/furusato-map/setagaya.png?v=05026d99" alt="Setagaya City page: donations received, solicitation costs, resident tax deductions, the difference, and national rankings" data-alt="Setagaya City page: donations received, solicitation costs, resident tax deductions, the difference, and national rankings"><img class="slide" src="/assets/projects/furusato-map/tokyo-map.png?v=f3df6c60" alt="A map of Tokyo's municipalities colored by donations received" data-alt="A map of Tokyo's municipalities colored by donations received">
+          <div class="carousel-counter"><span data-carousel-num>1</span> / 3</div>
+        </div>
+        <button type="button" class="carousel-arrow next" data-carousel-next aria-label="Next screenshot">›</button>
+      </div>
+      <div class="carousel-bar">
+        <p class="carousel-caption" data-carousel-caption>Top page: a map of Japan colored by donations received per prefecture</p>
+        <div class="carousel-controls">
+          <div class="carousel-dots">
+            <button type="button" aria-label="Choose a screenshot" class="active"></button><button type="button" aria-label="Choose a screenshot"></button><button type="button" aria-label="Choose a screenshot"></button>
+          </div>
+          <span class="carousel-hint">Tap to enlarge</span>
+        </div>
+      </div>
+    </section>
+    <script>
+    (() => {
+      const box = document.querySelector('.carousel');
+      if (!box) return;
+      const slides = Array.from(box.querySelectorAll('.slide'));
+      const dots = Array.from(document.querySelectorAll('.carousel-dots button'));
+      const num = document.querySelector('[data-carousel-num]');
+      const caption = document.querySelector('[data-carousel-caption]');
+      const isVideo = (el) => el.tagName === 'VIDEO';
+      const MULTI = true;
+      const L_CLOSE = "Close";
+      const L_PREV = "Previous screenshot";
+      const L_NEXT = "Next screenshot";
+      const L_ZOOM = "Click to zoom in / out";
+      let current = 0;
+      let timer;
+      let lbOpen = false;
+      const show = (next) => {
+        current = (next + slides.length) % slides.length;
+        slides.forEach((el, i) => {
+          const on = i === current;
+          el.classList.toggle('active', on);
+          if (isVideo(el)) {
+            if (on) { try { el.currentTime = 0; el.play(); } catch (e) {} }
+            else { el.pause(); }
+          }
+        });
+        dots.forEach((dot, i) => dot.classList.toggle('active', i === current));
+        num.textContent = current + 1;
+        caption.textContent = slides[current].dataset.alt || '';
+        if (lbOpen) renderLightbox();
+      };
+      const arm = () => {
+        clearInterval(timer);
+        if (lbOpen) return;                    // no auto-advance while the lightbox is open
+        if (isVideo(slides[current])) return;  // video slides do not auto-advance (let them play through)
+        timer = setInterval(() => show(current + 1), 4000);
+      };
+      const go = (d) => { show(current + d); arm(); };
+
+      // ===== tap to enlarge (lightbox) =====
+      const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+      const lb = document.createElement('div');
+      lb.className = 'lightbox';
+      lb.setAttribute('aria-hidden', 'true');
+      let html = '<div class="lightbox-inner">';
+      html += '<button type="button" class="lightbox-close" aria-label="' + esc(L_CLOSE) + '">×</button>';
+      if (MULTI) html += '<button type="button" class="lightbox-arrow prev" aria-label="' + esc(L_PREV) + '">‹</button>';
+      html += '<div class="lightbox-media"></div>';
+      if (MULTI) html += '<button type="button" class="lightbox-arrow next" aria-label="' + esc(L_NEXT) + '">›</button>';
+      html += '<p class="lightbox-caption"></p></div>';
+      lb.innerHTML = html;
+      document.body.appendChild(lb);
+      const lbInner = lb.querySelector('.lightbox-inner');
+      const lbMedia = lb.querySelector('.lightbox-media');
+      const lbCaption = lb.querySelector('.lightbox-caption');
+      const renderLightbox = () => {
+        const el = slides[current];
+        const alt = el.dataset.alt || '';
+        const src = el.currentSrc || el.getAttribute('src') || el.src;
+        lbMedia.classList.remove('zoomed');
+        lbMedia.innerHTML = isVideo(el)
+          ? '<video src="' + esc(src) + '" controls autoplay playsinline></video>'
+          : '<img src="' + esc(src) + '" alt="' + esc(alt) + '" title="' + esc(L_ZOOM) + '">';
+        lbCaption.textContent = alt;
+      };
+      const openLightbox = () => {
+        lbOpen = true;
+        clearInterval(timer);
+        renderLightbox();
+        lb.classList.add('open');
+        lb.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      };
+      const closeLightbox = () => {
+        if (!lbOpen) return;
+        lbOpen = false;
+        lb.classList.remove('open');
+        lb.setAttribute('aria-hidden', 'true');
+        lbMedia.innerHTML = '';
+        document.body.style.overflow = '';
+        arm();
+        try { box.focus(); } catch (e) {}
+      };
+      // tapping the backdrop closes; tapping the image toggles zoom
+      lb.addEventListener('click', (e) => {
+        if (e.target === lb || e.target === lbInner || e.target === lbMedia) { closeLightbox(); return; }
+        if (e.target.tagName === 'IMG') { lbMedia.classList.toggle('zoomed'); }
+      });
+      lb.querySelector('.lightbox-close').addEventListener('click', (e) => { e.stopPropagation(); closeLightbox(); });
+      const lbPrevBtn = lb.querySelector('.lightbox-arrow.prev');
+      const lbNextBtn = lb.querySelector('.lightbox-arrow.next');
+      if (lbPrevBtn) lbPrevBtn.addEventListener('click', (e) => { e.stopPropagation(); go(-1); });
+      if (lbNextBtn) lbNextBtn.addEventListener('click', (e) => { e.stopPropagation(); go(1); });
+
+      // inline: tap / Enter / Space to enlarge, arrow keys to move
+      box.addEventListener('click', () => openLightbox());
+      box.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(); }
+        else if (e.key === 'ArrowRight') { e.preventDefault(); go(1); }
+        else if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
+      });
+      document.addEventListener('keydown', (e) => {
+        if (!lbOpen) return;
+        if (e.key === 'Escape') { closeLightbox(); }
+        else if (MULTI && e.key === 'ArrowRight') { e.preventDefault(); go(1); }
+        else if (MULTI && e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
+      });
+      const prev = document.querySelector('[data-carousel-prev]');
+      const next = document.querySelector('[data-carousel-next]');
+      if (prev) prev.addEventListener('click', (e) => { e.stopPropagation(); go(-1); });
+      if (next) next.addEventListener('click', (e) => { e.stopPropagation(); go(1); });
+      dots.forEach((dot, i) => dot.addEventListener('click', (e) => { e.stopPropagation(); show(i); arm(); }));
+      show(0);
+      arm();
+    })();
+    </script>
+    <section class="anim d5">
+      <h2>The record</h2>
+      <dl class="facts">
+    <div><dt>Build period</dt><dd>2026-10-13 - 2026-10-22 (first version 10-18, published 10-22)</dd></div>
+    <div><dt>Rough cost</dt><dd>¥0 (public data and GitHub Pages only, no external APIs).</dd></div>
+    <div><dt>Tools used</dt><dd>TypeScript / Vite / Python / GitHub Pages / MCP / Claude / Codex</dd></div>
+  </dl><p class="cost-note">Baseline: Claude and Codex subscriptions (about ¥3,000/month each) are always running as a given.</p>
+    </section>
+    <section>
+      <h2>AI used</h2>
+      <ul class="plain-list"><li><strong>Claude</strong><span>Building the pages and maps, the MCP server, and the in-browser interaction tests</span></li><li><strong>Codex</strong><span>Data processing that reads the Ministry's Excel files and cross-checks the totals, plus joint planning discussions and reviews</span></li></ul>
+    </section>
+    <section>
+      <h2>Where I got stuck, and how I got out</h2>
+      <div class="notes"><div>
+        <span class="num">01</span>
+        <div>
+          <h3>Simply adding up the prefecture and municipality figures counted resident tax deductions twice.</h3>
+          <p>I split prefectures and municipalities into separate tables, and added tests that check every time that the national totals and all 47 prefectures match the Ministry's press release.</p>
+        </div>
+      </div><div>
+        <span class="num">02</span>
+        <div>
+          <h3>Drawing every remote island in its true position made the main islands too small to read, and excluding islands automatically by distance also dropped some mainland municipalities.</h3>
+          <p>I named only the distant islands explicitly and listed them as name buttons outside the map.</p>
+        </div>
+      </div><div>
+        <span class="num">03</span>
+        <div>
+          <h3>The map data was from 2016, so municipalities that became cities afterward had new codes and were left uncolored.</h3>
+          <p>I built a table that maps the changed codes, and confirmed that every municipality gets a color.</p>
+        </div>
+      </div></div>
+    </section>
+    
+    <section>
+      <h2>Links</h2>
+      <ul class="plain-list"><li><a href="https://github.com/TENKAKU-ux/furusato-map" target="_blank" rel="noopener">GitHub — furusato-map</a></li></ul>
+    </section>
+  </article>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>GitHub: <a href="https://github.com/TENKAKU-ux" target="_blank" rel="noopener">TENKAKU-ux</a></span>
+      <span>X: <a href="https://x.com/TINAMI_tay" target="_blank" rel="noopener">@TINAMI_tay</a></span>
+      <span>Zenn: <a href="https://zenn.dev/tenkaku_ux" target="_blank" rel="noopener">tenkaku_ux</a></span>
+    </div>
+  </footer>
+</body>
+</html>

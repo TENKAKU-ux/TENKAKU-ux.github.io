@@ -1,7 +1,128 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-07-12",
+  "updated": "2026-10-22",
   "projects": [
+    {
+      "slug": "furusato-map",
+      "category": "published",
+      "title": "ふるさと納税マップ",
+      "subtitle": "自治体の収支を地図で見る",
+      "status": "公開中",
+      "summary": "総務省の公表データから、全国1,788の自治体ごとに、ふるさと納税の受入額・募集費用・住民税控除額と、その差額を地図と表で確かめられる Web サイト。",
+      "description": "ふるさと納税で寄附を集めている自治体がある一方で、住民が他の自治体へ寄附すると、その分だけ住民税が減る自治体もあります。このサイトでは、総務省の「ふるさと納税に関する現況調査結果」をもとに、自治体ごとの受入額と住民税の控除額を並べ、その差額を日本地図の色分けや全国の順位で見られるようにしました。人口1人あたりの額、募集費用の中身、受入額の推移（平成20年度から）も見られ、ページの URL をそのまま共有できます。また、AI エージェントが同じデータを調べられるように、ブラウザ向けの WebMCP と、Claude Code などに登録できる MCP サーバーも用意しています。非公式のサイトで、出典は総務省・e-Stat・国土地理院です。",
+      "play": {
+        "label": "▶ サイトを開く",
+        "url": "https://tenkaku-ux.github.io/furusato-map/"
+      },
+      "period": "2026-10-13 〜 2026-10-22（10-18 に初版、10-22 に公開）",
+      "costApprox": "0円（公開データと GitHub Pages のみ・外部 API 不使用）※大前提として Claude / Codex のサブスク（各 月約3,000円）を常用",
+      "tools": [
+        "TypeScript",
+        "Vite",
+        "Python",
+        "GitHub Pages",
+        "MCP",
+        "Claude",
+        "Codex"
+      ],
+      "aiUsed": [
+        {
+          "name": "Claude",
+          "usage": "画面と地図の実装、MCP サーバーの実装、ブラウザでの操作テスト"
+        },
+        {
+          "name": "Codex",
+          "usage": "総務省の Excel を読み込むデータ処理と検算、計画の共同議論とレビュー"
+        }
+      ],
+      "stuckPoints": [
+        {
+          "problem": "都道府県と市区町村の数字をそのまま足すと、住民税の控除額が二重に数えられてしまう。",
+          "solution": "都道府県と市区町村を別の表に分け、全国の合計と47都道府県の値が総務省の報道資料と一致するかをテストで毎回確かめるようにした。"
+        },
+        {
+          "problem": "日本地図に離島まで正しい位置で描くと、本土が小さくなって見づらい。距離で自動的に外す方法では、本土の市町村まで外れてしまった。",
+          "solution": "遠い島だけを名前で指定し、地図の外に名前のボタンとして並べる形にした。"
+        },
+        {
+          "problem": "地図の元データが2016年のもので、その後に市になった自治体はコードが変わっていて、色が塗られなかった。",
+          "solution": "変わったコードを読み替える表を作り、すべての自治体に色が付くことを確かめた。"
+        }
+      ],
+      "screenshots": [
+        {
+          "src": "/assets/projects/furusato-map/home.png",
+          "alt": "トップページ。都道府県ごとの受入額で色分けした日本地図"
+        },
+        {
+          "src": "/assets/projects/furusato-map/setagaya.png",
+          "alt": "世田谷区のページ。受入額・募集費用・住民税控除額・差額と全国順位"
+        },
+        {
+          "src": "/assets/projects/furusato-map/tokyo-map.png",
+          "alt": "東京都の市区町村を受入額で色分けした地図"
+        }
+      ],
+      "links": [
+        {
+          "label": "GitHub — furusato-map",
+          "url": "https://github.com/TENKAKU-ux/furusato-map"
+        }
+      ],
+      "related": [],
+      "tags": [
+        "Open Data",
+        "Map",
+        "MCP",
+        "TypeScript",
+        "Japanese"
+      ],
+      "en": {
+        "title": "Furusato Nozei Map",
+        "subtitle": "Hometown tax balances on a map",
+        "status": "Live",
+        "summary": "A website that uses data published by Japan's Ministry of Internal Affairs and Communications to show, for each of 1,788 local governments, the donations received under the hometown tax (furusato nozei) program, the cost of soliciting them, the resident tax deductions, and the difference, on a map and in tables.",
+        "description": "Some local governments collect large donations through the hometown tax program, while others lose resident tax revenue when their residents donate elsewhere. Based on the Ministry's survey of the program, this site puts each local government's donations received next to its resident tax deductions and shows the difference as a color-coded map of Japan and nationwide rankings. You can also see per-capita figures, a breakdown of solicitation costs, and how donations have changed since fiscal 2008, and every page has a shareable URL. So that AI agents can look up the same data, it also offers WebMCP tools in the browser and an MCP server you can register in tools such as Claude Code. The site is unofficial, and its sources are the Ministry of Internal Affairs and Communications, e-Stat, and the Geospatial Information Authority of Japan. The site itself is in Japanese.",
+        "play": {
+          "label": "▶ Open the site (Japanese)"
+        },
+        "period": "2026-10-13 - 2026-10-22 (first version 10-18, published 10-22)",
+        "costApprox": "¥0 (public data and GitHub Pages only, no external APIs). Baseline: Claude and Codex subscriptions (about ¥3,000/month each) are always running as a given.",
+        "aiUsed": [
+          {
+            "usage": "Building the pages and maps, the MCP server, and the in-browser interaction tests"
+          },
+          {
+            "usage": "Data processing that reads the Ministry's Excel files and cross-checks the totals, plus joint planning discussions and reviews"
+          }
+        ],
+        "stuckPoints": [
+          {
+            "problem": "Simply adding up the prefecture and municipality figures counted resident tax deductions twice.",
+            "solution": "I split prefectures and municipalities into separate tables, and added tests that check every time that the national totals and all 47 prefectures match the Ministry's press release."
+          },
+          {
+            "problem": "Drawing every remote island in its true position made the main islands too small to read, and excluding islands automatically by distance also dropped some mainland municipalities.",
+            "solution": "I named only the distant islands explicitly and listed them as name buttons outside the map."
+          },
+          {
+            "problem": "The map data was from 2016, so municipalities that became cities afterward had new codes and were left uncolored.",
+            "solution": "I built a table that maps the changed codes, and confirmed that every municipality gets a color."
+          }
+        ],
+        "screenshots": [
+          {
+            "alt": "Top page: a map of Japan colored by donations received per prefecture"
+          },
+          {
+            "alt": "Setagaya City page: donations received, solicitation costs, resident tax deductions, the difference, and national rankings"
+          },
+          {
+            "alt": "A map of Tokyo's municipalities colored by donations received"
+          }
+        ]
+      }
+    },
     {
       "slug": "video-translate-ext",
       "category": "local",
